@@ -37,6 +37,7 @@ export const styles = theme => ({
   button: {
     margin: theme.spacing.unit*2,
     fontSize: `1rem`,
+    color: `rgba(255, 255, 255, 0.5)`,
   },
   catLabel: {
     textTransform: `uppercase`,
