@@ -10,28 +10,28 @@ const headers = {
   'Authorization': token
 }
 
-export const getCategories = () =>
+export const getAllCategories = () =>
   fetch(`${api}/categories`, { headers })
   .then(
     res => res.json(),
     error => console.log('An error occurred', error)
   )
 
-export const getAllPosts = () =>
+export const getAllCategoriesPosts = () =>
   fetch(`${api}/posts`, { headers })
   .then(
     res => res.json(),
     error => console.log('An error occurred', error)
   )
 
-export const getPostsByCategory = category =>
+export const getAllPostsByCategory = category =>
   fetch(`${api}/${category}/posts`, { headers })
   .then(
     res => res.json(),
     error => console.log('An error occurred', error)
   )
 
-export const addPost = obj =>
+export const addSinglePost = obj =>
   fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
@@ -41,14 +41,14 @@ export const addPost = obj =>
     body: JSON.stringify(obj)
   }).then(res => res.json())
 
-export const getPost = post =>
+export const getSinglePost = post =>
   fetch(`${api}/posts/${post}`, { headers })
   .then(
     res => res.json(),
     error => console.log('An error occurred', error)
   )
 
-export const deletePost = (post) =>
+export const deleteSinglePost = post =>
   fetch(`${api}/posts/${post}`, {
     method: 'DELETE',
     headers: {
@@ -57,7 +57,7 @@ export const deletePost = (post) =>
     }
   })
 
-export const addPostVote = (post, vote) =>
+export const updateSinglePostVote = (post, vote) =>
   fetch(`${api}/posts/${post}`, {
     method: 'POST',
     headers: {
@@ -67,7 +67,7 @@ export const addPostVote = (post, vote) =>
     body: JSON.stringify(post)
   }).then(res => res.json())
 
-export const editPost = (post) =>
+export const editSinglePost = post =>
   fetch(`${api}/posts/${post}`, {
     method: 'PUT',
     headers: {
@@ -77,21 +77,21 @@ export const editPost = (post) =>
     body: JSON.stringify(post)
   }).then(res => res.json())
 
-export const getCommentsByPost = post =>
+export const getAllCommentsByPost = post =>
   fetch(`${api}/posts/${post}/comments`, { headers })
   .then(
     res => res.json(),
     error => console.log('An error occurred', error)
   )
 
-export const getComment = comment =>
+export const getSingleComment = comment =>
   fetch(`${api}/comments/${comment}`, { headers })
   .then(
     res => res.json(),
     error => console.log('An error occurred', error)
   )
 
-export const editComment = (comment) =>
+export const editSingleComment = comment =>
   fetch(`${api}/comments/${comment}`, {
     method: 'PUT',
     headers: {
@@ -101,7 +101,7 @@ export const editComment = (comment) =>
     body: JSON.stringify(comment)
   }).then(res => res.json())
 
-export const addComment = obj =>
+export const addSingleComment = obj =>
   fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
@@ -111,7 +111,7 @@ export const addComment = obj =>
     body: JSON.stringify(obj)
   }).then(res => res.json())
 
-export const addCommentVote = (comment, vote) =>
+export const updateSingleCommentVote = (comment, vote) =>
   fetch(`${api}/comments/${comment}`, {
     method: 'POST',
     headers: {
@@ -121,7 +121,7 @@ export const addCommentVote = (comment, vote) =>
     body: JSON.stringify(comment)
   }).then(res => res.json())
 
-export const deleteComment = (comment) =>
+export const deleteSingleComment = comment =>
   fetch(`${api}/comments/${comment}`, {
     method: 'DELETE',
     headers: {
@@ -129,12 +129,3 @@ export const deleteComment = (comment) =>
       'Content-Type': 'application/json'
     }
   })
-
-
-
-
-
-
-
-
-//

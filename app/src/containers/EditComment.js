@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import EditPostForm from './../components/EditPostForm'
+import Post from './../components/EditCommentForm'
 import {
   fetchAllPosts,
 
 } from './../actions'
 
-const EditPost = () => {
+const EditComment = () => {
   return (
-    <EditPostForm />
+    <Post />
   )
 }
 
-export default EditPost
+export default EditComment
