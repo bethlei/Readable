@@ -1,18 +1,32 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import { styles } from './../utils/styles'
 import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
-import Category from './../components/Category.js'
-
-
+import { fetchAllPosts } from './../actions'
+import Category from './../components/Category'
+import { ListAllPosts, ListCategoryPosts } from './ListPosts'
+import PostDetails from './PostDetails'
+import EditPost from './EditPost'
+import CreatePost from './CreatePost'
+import NoMatch from './NoMatch'
 
 class App extends Component {
+  state = {
+    fetchPosts: true
+  }
 
-
-
+  componentDidMount() {
+    if (this.state.fetchPosts) {
+      this.props.getPosts()
+      this.setState({
+        fetchPosts: false
+      })
+    }
+  }
 
   render() {
     const classes = this.props.classes;
@@ -30,32 +44,39 @@ class App extends Component {
             <Switch>
               <Route exact path='/' render={() => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}>Main - list all post view</Paper>
+                  <Paper className={classes.paper}><ListAllPosts /></Paper>
                 </Grid>
               )} />
-              <Route path='/category' render={() => (
+              <Route exact path='/category/:category?' render={() => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}>Main - category list post view</Paper>
+                  <Paper className={classes.paper}><ListCategoryPosts /></Paper>
                 </Grid>
               )} />
-              <Route path='/postdetails' render={() => (
+              <Route exact path='/post/:post?' render={() => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}>Main - show post details view</Paper>
+                  <Paper className={classes.paper}><PostDetails /></Paper>
                 </Grid>
               )} />
-              <Route path='/addpost' render={() => (
-                <Grid item xs={12}>
-                  <Paper className={classes.paper}>Main - add post form view</Paper>
-                </Grid>
-              )} />
-              <Route path='/editpost' render={() => (
+              <Route exact path='/post/edit/:post?' render={() => (
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>Main - edit post form view</Paper>
                 </Grid>
               )} />
+              // use modal for addpost
+              <Route exact path='/addpost' render={() => (
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}><div>Main - add post form view</div></Paper>
+                </Grid>
+              )} />
+              // use modal for addcomment
+              <Route exact path='/addcomment' render={() => (
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}><div>Main - add comment form view</div></Paper>
+                </Grid>
+              )} />
               <Route render={() => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}>No match</Paper>
+                  <Paper className={classes.paper}><NoMatch /></Paper>
                 </Grid>
               )} />
             </Switch>
@@ -68,6 +89,14 @@ class App extends Component {
 
 App.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(App);
+const mapStateToProps = state => ({
+  state
+})
+
+const mapDispatchToProps = {
+  getPosts: fetchAllPosts
+}
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(App));
