@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { styles } from './../utils/styles'
 import Button from 'material-ui/Button';
-import { getCategories } from './../actions'
+
 
 function doSomething(event) {
   console.log(event.currentTarget.getAttribute(`data-something`));
 }
 
 class Category extends Component {
+
   render() {
     const classes = this.props.classes;
     return (

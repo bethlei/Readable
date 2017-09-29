@@ -14,7 +14,7 @@ const { VOTE_SCORE, TIME_STAMP } = sortTypes
 
 const getSortedPosts = (allPosts, posts, sortOrder) => {
   let sortedPostIds;
-
+  
   switch (sortOrder) {
     case VOTE_SCORE:
       sortedPostIds = allPosts.sort(function(a,b) {

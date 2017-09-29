@@ -10,6 +10,7 @@ import {
   DELETE_POST,
   UPDATE_POST_VOTE,
   EDIT_POST,
+  GET_ALL_COMMENTS,
   GET_COMMENTS_BY_POST,
   GET_COMMENT,
   EDIT_COMMENT,
@@ -48,6 +49,12 @@ function sortOrder(state = initialState.sortOrder, action) {
 
 function posts(state = initialState.posts, action) {
   switch(action.type) {
+    case GET_ALL_POSTS:
+      const posts = action.posts
+      return {
+        ...posts
+      }
+
     case GET_POST:
       return action.posts
 
@@ -72,8 +79,14 @@ function comments(state = initialState.comments, action) {
   const commentId = action.commentId
 
   switch(action.type) {
+    case GET_ALL_COMMENTS:
+      const comments = action.dataObj
+      return {
+        ...state,
+        ...comments
+      }
+
     case GET_COMMENTS_BY_POST:
-      const comments = action.data
       return {
         ...state,
         ...comments
@@ -102,7 +115,7 @@ function comments(state = initialState.comments, action) {
 function allPosts(state = initialState.allPosts, action) {
   switch(action.type) {
     case GET_ALL_POSTS:
-      return action.allPosts
+      return [...action.allPosts]
 
     default:
       return state
@@ -112,7 +125,7 @@ function allPosts(state = initialState.allPosts, action) {
 function postsByCategory(state = initialState.postsByCategory, action) {
   switch(action.type) {
     case GET_POSTS_BY_CATEGORY:
-      return action.postsByCategory
+      return [...action.postsByCategory]
 
     default:
       return state

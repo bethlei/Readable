@@ -6,7 +6,7 @@ import { withStyles } from 'material-ui/styles'
 import { styles } from './../utils/styles'
 import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
-import { fetchAllPosts } from './../actions'
+import { fetchAllPosts, getCategories } from './../actions'
 import Category from './../components/Category'
 import { ListAllPosts, ListCategoryPosts } from './ListPosts'
 import PostDetails from './PostDetails'
@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   render() {
-    const classes = this.props.classes;
+    const classes = this.props.classes
 
     return (
       <Router>
