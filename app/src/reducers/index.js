@@ -4,18 +4,15 @@ import {
   CHANGE_SORT_ORDER,
   GET_CATEGORIES,
   GET_ALL_POSTS,
-  GET_POSTS_BY_CATEGORY,
   ADD_POST,
-  GET_POST,
+  FLAG_POST_AS_DELETED,
   DELETE_POST,
-  UPDATE_POST_VOTE,
+  UPDATE_POST_SCORE,
   EDIT_POST,
-  GET_ALL_COMMENTS,
   GET_COMMENTS_BY_POST,
-  GET_COMMENT,
   EDIT_COMMENT,
   ADD_COMMENT,
-  UPDATE_COMMENT_VOTE,
+  UPDATE_COMMENT_SCORE,
   DELETE_COMMENT } from './../actions'
 
 const initialState = {
@@ -48,6 +45,10 @@ function sortOrder(state = initialState.sortOrder, action) {
 }
 
 function posts(state = initialState.posts, action) {
+  const post = action.post
+  const postId = action.postId
+  const parentId = action.parentId
+
   switch(action.type) {
     case GET_ALL_POSTS:
       const posts = action.posts
@@ -55,20 +56,73 @@ function posts(state = initialState.posts, action) {
         ...posts
       }
 
-    case GET_POST:
-      return action.posts
+    case GET_COMMENTS_BY_POST:
+      const comments = action.commentArr
+      return {
+        ...state,
+        [parentId]: {
+          ...state[parentId],
+          comments: [...comments]
+        }
+      }
 
     case ADD_POST:
-      return action.posts
+      return {
+        ...state,
+        [postId]: {
+          ...post,
+          comments: []
+        }
+      }
 
-    case DELETE_POST:
-      return action.posts
-
-    case UPDATE_POST_VOTE:
-      return action.posts
+    case ADD_COMMENT:
+        return {
+          ...state,
+          [parentId]: {
+            ...state[parentId],
+            comments: [...state[parentId].comments, action.commentId]
+          }
+        }
 
     case EDIT_POST:
-      return action.posts
+      return {
+        ...state,
+        [postId]: {
+          ...state[postId],
+          category: action.category,
+          title: action.title,
+          body: action.body
+        }
+      }
+
+    case FLAG_POST_AS_DELETED:
+      return {
+        ...state,
+        [postId]: {
+          ...state[postId],
+          deleted: true
+        }
+      }
+
+    case DELETE_COMMENT:
+      const commentsIds = action.commentsIds
+      return {
+        ...state,
+        [postId]: {
+          ...state[postId],
+          comments: [...commentsIds]
+        }
+      }
+
+    case UPDATE_POST_SCORE:
+      const postScore = action.postScore
+      return {
+        ...state,
+        [postId]: {
+          ...state[postId],
+          voteScore: postScore
+        }
+      }
 
     default:
       return state
@@ -86,20 +140,31 @@ function comments(state = initialState.comments, action) {
         ...comments
       }
 
-    case GET_COMMENT:
-      return action.comments
+    case ADD_COMMENT:
+      return {
+        ...state,
+        [commentId]: action.comment
+      }
 
     case EDIT_COMMENT:
-      return action.comments
+      return {
+        ...state,
+        [commentId]: {
+          ...state[commentId],
+          timestamp: action.timestamp,
+          body: action.body
+        }
+      }
 
-    case ADD_COMMENT:
-      return action.comments
-
-    case UPDATE_COMMENT_VOTE:
-      return action.comments
-
-    case DELETE_COMMENT:
-      return action.comments
+    case UPDATE_COMMENT_SCORE:
+      const commentScore = action.commentScore
+      return {
+        ...state,
+        [commentId]: {
+          ...state[commentId],
+          voteScore: commentScore
+        }
+      }
 
     default:
       return state
@@ -107,9 +172,18 @@ function comments(state = initialState.comments, action) {
 }
 
 function allPosts(state = initialState.allPosts, action) {
+  const allPosts = action.allPosts
+  const postId = action.postId
+
   switch(action.type) {
     case GET_ALL_POSTS:
-      return [...action.allPosts]
+      return [...allPosts]
+
+    case ADD_POST:
+      return [...state, postId]
+
+    case DELETE_POST:
+      return [...allPosts]
 
     default:
       return state
@@ -117,9 +191,43 @@ function allPosts(state = initialState.allPosts, action) {
 }
 
 function postsByCategory(state = initialState.postsByCategory, action) {
+  const categories = action.categories
+  let categoriesState = {}
+
   switch(action.type) {
-    case GET_POSTS_BY_CATEGORY:
-      return [...action.postsByCategory]
+    case GET_CATEGORIES:
+      categories.map(category => {
+        categoriesState[category] = {
+          posts: []
+        }
+      })
+      return categoriesState;
+
+    case GET_ALL_POSTS:
+      const posts = action.posts
+      const postsIds = action.allPosts
+      let categoriesArr = [];
+
+      for (const category in state) {
+        categoriesArr.push(category)
+      }
+      categoriesArr.map(category => {
+        categoriesState[category] = {
+          posts: postsIds.filter(postId => posts[postId].category === category)
+        }
+      })
+      return categoriesState
+
+    case ADD_POST:
+      const postId = action.postId
+      const post = action.post
+      const category = post.category
+      return {
+        ...state,
+        [category]: {
+          posts: [...state, postId]
+        }
+      }
 
     default:
       return state

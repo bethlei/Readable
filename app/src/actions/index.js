@@ -1,20 +1,19 @@
 import generateId from './../utils/generateId'
-import moment, { format } from 'moment'
+import moment from 'moment'
 import {
   getAllCategories,
   getAllCategoriesPosts,
-  getAllPostsByCategory,
   addSinglePost,
   getSinglePost,
   deleteSinglePost,
   updateSinglePostVote,
   editSinglePost,
   getAllCommentsByPost,
+  addSingleComment,
   getSingleComment,
   editSingleComment,
-  addSingleComment,
-  updateSingleCommentVote,
-  deleteSingleComment
+  deleteSingleComment,
+  updateSingleCommentVote
 } from './../utils/ReadableAPI'
 
 export const CHANGE_SORT_ORDER = 'CHANGE_SORT_ORDER'
@@ -23,15 +22,16 @@ export const GET_ALL_POSTS = 'GET_ALL_POSTS'
 export const GET_POSTS_BY_CATEGORY = 'GET_POSTS_BY_CATEGORY'
 export const ADD_POST = 'ADD_POST'
 export const GET_POST = 'GET_POST'
-export const DELETE_POST = 'DELETE_POST'
-export const UPDATE_POST_VOTE = 'UPDATE_POST_VOTE'
 export const EDIT_POST = 'EDIT_POST'
+export const FLAG_POST_AS_DELETED = 'FLAG_POST_AS_DELETED'
+export const DELETE_POST = 'DELETE_POST'
+export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE'
 export const GET_COMMENTS_BY_POST = 'GET_COMMENTS_BY_POST'
+export const ADD_COMMENT = 'ADD_COMMENT'
 export const GET_COMMENT = 'GET_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
-export const ADD_COMMENT = 'ADD_COMMENT'
-export const UPDATE_COMMENT_VOTE = 'UPDATE_COMMENT_VOTE'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE'
 
 
 export function fetchAllPosts() {
@@ -89,41 +89,83 @@ export function getPostsByCategory(data, category) {
   }
 }
 
-// console.log('moment-format', moment().format('MMMM Do YYYY, h:mm:ss a'))
-// console.log('moment-unix', moment().unix())
+export function addPostToServer(post) {
+  return dispatch => {
+    const id = generateId()
+    const timestamp = moment().unix()
+    return addSinglePost({ ...post, id, timestamp })
+      .then(() => getSinglePost(id)
+      .then(data => dispatch(addPost(data)))
+    )
+  }
+}
 
 export function addPost(data) {
-  return dispatch => {
+  return {
     type: ADD_POST,
-    data
+    postId: data.id,
+    post: data
   }
 }
 
-export function getPost(data) {
-  return {
-    type: GET_POST,
-    data
-  }
-}
-
-export function deletePost(data) {
-  return {
-    type: DELETE_POST,
-    data
-  }
-}
-
-export function updatePostVote(data) {
-  return {
-    type: UPDATE_POST_VOTE,
-    data
+export function editPostToServer(postId, newPost) {
+  return dispatch => {
+    return editSinglePost(postId, newPost)
+      .then(() => getSinglePost(postId)
+      .then(data => dispatch(editPost(data)))
+    )
   }
 }
 
 export function editPost(data) {
   return {
     type: EDIT_POST,
-    data
+    postId: data.id,
+    category: data.category,
+    title: data.title,
+    body: data.body
+  }
+}
+
+export function flagPostAsDeleted(postId) {
+  return {
+    type: FLAG_POST_AS_DELETED,
+    postId
+  }
+}
+
+export function deletePostToServer(postId) {
+  return dispatch => {
+    return deleteSinglePost(postId)
+      .then(() => dispatch(flagPostAsDeleted(postId)))
+      .then(() => getAllCategoriesPosts()
+      .then(data => dispatch(deletePost(data)))
+    )
+  }
+}
+
+export function deletePost(data) {
+  return {
+    type: DELETE_POST,
+    allPosts: data.filter(post => !post.deleted)
+                  .map(post => post.id)
+  }
+}
+
+export function updatePostScoreToServer(postId, vote) {
+  return dispatch => {
+    return updateSinglePostVote(postId, vote)
+      .then(() => getSinglePost(postId)
+      .then(data => dispatch(updatePostScore(data)))
+    )
+  }
+}
+
+export function updatePostScore(data) {
+  return {
+    type: UPDATE_POST_SCORE,
+    postId: data.id,
+    postScore: data.voteScore
   }
 }
 
@@ -132,45 +174,86 @@ export function getCommentsByPost(data, parentId) {
   for (let i = 0; i < data.length; i++) {
     dataObj[data[i].id] = data[i];
   }
+  let commentArr = data.map(comment => comment.id);
 
   return {
     type: GET_COMMENTS_BY_POST,
     dataObj,
+    commentArr,
     parentId
   }
 }
 
-export function getComment(data) {
-  return {
-    type: GET_COMMENT,
-    data
-  }
-}
-
-export function editComment(data) {
-  return {
-    type: EDIT_COMMENT,
-    data
+export function addCommentToServer(comment) {
+  return dispatch => {
+    const id = generateId()
+    const timestamp = moment().unix()
+    return addSingleComment({ ...comment, id, timestamp })
+      .then(() => getSingleComment(id)
+      .then(data => dispatch(addComment(data)))
+    )
   }
 }
 
 export function addComment(data) {
   return {
     type: ADD_COMMENT,
-    data
+    parentId: data.parentId,
+    commentId: data.commentId,
+    comment: data
   }
 }
 
-export function updateCommentVote(data) {
+export function editCommentToServer(commentId, newComment) {
+  return dispatch => {
+    const timestamp = moment().unix()
+    return editSingleComment(commentId, { ...newComment, timestamp })
+      .then(() => getSingleComment(commentId)
+      .then(data => dispatch(editComment(data)))
+    )
+  }
+}
+
+export function editComment(data) {
   return {
-    type: UPDATE_COMMENT_VOTE,
-    data
+    type: EDIT_COMMENT,
+    commentId: data.commentId,
+    timestamp: data.timestamp,
+    body: data.body
   }
 }
 
-export function deleteComment(data) {
+export function updateCommentScoreToServer(commentId, vote) {
+  return dispatch => {
+    return updateSingleCommentVote(commentId, vote)
+      .then(() => getSingleComment(commentId)
+      .then(data => dispatch(updateCommentScore(data)))
+    )
+  }
+}
+
+export function updateCommentScore(data) {
+  return {
+    type: UPDATE_COMMENT_SCORE,
+    commentId: data.commentId,
+    commentScore: data.voteScore
+  }
+}
+
+export function deleteCommentToServer(commentId, postId) {
+  return dispatch => {
+    return deleteSingleComment(commentId)
+      .then(() => getAllCommentsByPost(postId)
+      .then(data => dispatch(deleteComment(data, postId)))
+    )
+  }
+}
+
+export function deleteComment(data, parentId) {
   return {
     type: DELETE_COMMENT,
-    data
+    postId: parentId,
+    commentsIds: data.filter(comment => !comment.deleted)
+                     .map(comment => comment.id)
   }
 }
