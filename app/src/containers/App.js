@@ -99,4 +99,4 @@ const mapDispatchToProps = {
   getPosts: fetchAllPosts
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(App))

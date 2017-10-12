@@ -26,7 +26,6 @@ export const GET_POST = 'GET_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const UPDATE_POST_VOTE = 'UPDATE_POST_VOTE'
 export const EDIT_POST = 'EDIT_POST'
-export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS'
 export const GET_COMMENTS_BY_POST = 'GET_COMMENTS_BY_POST'
 export const GET_COMMENT = 'GET_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
@@ -128,20 +127,6 @@ export function editPost(data) {
   }
 }
 
-export function getAllComments(data, parentId) {
-  let dataObj = {};
-  for (let i = 0; i < data.length; i++) {
-    dataObj[data[i].id] = data[i];
-  }
-
-  return {
-    type: GET_ALL_COMMENTS,
-    comments: data.map(comment => comment.id),
-    dataObj,
-    parentId
-  }
-}
-
 export function getCommentsByPost(data, parentId) {
   let dataObj = {};
   for (let i = 0; i < data.length; i++) {
@@ -150,7 +135,7 @@ export function getCommentsByPost(data, parentId) {
 
   return {
     type: GET_COMMENTS_BY_POST,
-    comments: dataObj,
+    dataObj,
     parentId
   }
 }

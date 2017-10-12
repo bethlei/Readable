@@ -79,14 +79,8 @@ function comments(state = initialState.comments, action) {
   const commentId = action.commentId
 
   switch(action.type) {
-    case GET_ALL_COMMENTS:
-      const comments = action.dataObj
-      return {
-        ...state,
-        ...comments
-      }
-
     case GET_COMMENTS_BY_POST:
+      const comments = action.dataObj
       return {
         ...state,
         ...comments
