@@ -47,9 +47,9 @@ class App extends Component {
                   <Paper className={classes.paper}><ListAllPosts /></Paper>
                 </Grid>
               )} />
-              <Route exact path='/category/:category?' render={() => (
+              <Route exact path='/category/:category?' render={(props) => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}><ListCategoryPosts /></Paper>
+                  <Paper className={classes.paper}><ListCategoryPosts {...props} /></Paper>
                 </Grid>
               )} />
               <Route exact path='/post/:post?' render={() => (
