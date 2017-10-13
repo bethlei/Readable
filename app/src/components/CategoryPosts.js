@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-import moment, { format } from 'moment'
+import moment from 'moment'
 import { Link } from 'react-router-dom'
 
 class CategoryPosts extends Component {
-  componentDidMount() {
-    const { category } = this.props.match.params
-  }
-
   render() {
     const posts = this.props.posts
     const sortedPostIds = this.props.sortedPostIds

@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import AllPosts from './../components/AllPosts'
 import CategoryPosts from './../components/CategoryPosts'
@@ -6,7 +5,6 @@ import {
   fetchAllPosts,
   sortTypes,
   changeSortOrder,
-  getAllPosts
 } from './../actions'
 
 const { VOTE_SCORE, TIME_STAMP } = sortTypes

@@ -12,7 +12,6 @@ import { ListAllPosts, ListCategoryPosts } from './ListPosts'
 import PostDetails from './PostDetails'
 import EditPost from './EditPost'
 import CreatePost from './CreatePost'
-import CreateComment from './CreateComment'
 import NoMatch from './NoMatch'
 
 class App extends Component {
@@ -66,11 +65,6 @@ class App extends Component {
               <Route exact path='/addpost' render={() => (
                 <Grid item xs={12}>
                   <Paper className={classes.paper}><CreatePost /></Paper>
-                </Grid>
-              )} />
-              <Route exact path='/addcomment' render={() => (
-                <Grid item xs={12}>
-                  <Paper className={classes.paper}><CreateComment /></Paper>
                 </Grid>
               )} />
               <Route render={() => (
