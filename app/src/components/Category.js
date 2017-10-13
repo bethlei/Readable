@@ -1,44 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { styles } from './../utils/styles'
 import Button from 'material-ui/Button';
 
+const Category = (props) => {
+  const categories = ['react', 'redux', 'udacity']
+  const classes = props.classes
 
-function doSomething(event) {
-  console.log(event.currentTarget.getAttribute(`data-something`));
-}
+  return (
+    <div className={classes.category}>
+      <Button color="contrast" dense classes={{
+        root: classes.button,
+        label: classes.catLabel,
+      }}>{props.children ? props.children : <Link className={classes.catLink} to='/'>All Posts</Link>}</Button>
 
-class Category extends Component {
-
-  render() {
-    const classes = this.props.classes;
-    return (
-      <div className={classes.category}>
+      {categories.map(category => (
         <Button color="contrast" dense classes={{
           root: classes.button,
           label: classes.catLabel,
-        }} onClick={doSomething} data-something="all posts">{this.props.children ? this.props.children : <Link  className={classes.catLink} to='/'>All Posts</Link>}</Button>
-
-
-        <Button color="contrast" dense classes={{
-          root: classes.button,
-          label: classes.catLabel,
-        }} onClick={doSomething} data-something="React">{this.props.children ? this.props.children : <Link  className={classes.catLink} to='/category/react'>React</Link>}</Button>
-
-        <Button color="contrast" dense classes={{
-          root: classes.button,
-          label: classes.catLabel,
-        }} onClick={doSomething} data-something="Redux">{this.props.children ? this.props.children : <Link  className={classes.catLink} to='/category/redux'>Redux</Link>}</Button>
-
-        <Button color="contrast" dense classes={{
-          root: classes.button,
-          label: classes.catLabel,
-        }} onClick={doSomething} data-something="Udacity">{this.props.children ? this.props.children : <Link  className={classes.catLink} to='/category/udacity'>Udacity</Link>}</Button>
-      </div>
-    );
-  }
+        }} key={category}>{props.children ? props.children : <Link className={classes.catLink} to={'/category/' + category}>{category}</Link>}</Button>
+      ))}
+    </div>
+  );
 }
 
 Category.propTypes = {
