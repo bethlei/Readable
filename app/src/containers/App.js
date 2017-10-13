@@ -6,12 +6,13 @@ import { withStyles } from 'material-ui/styles'
 import { styles } from './../utils/styles'
 import Grid from 'material-ui/Grid'
 import Paper from 'material-ui/Paper'
-import { fetchAllPosts, getCategories } from './../actions'
+import { fetchAllPosts } from './../actions'
 import Category from './../components/Category'
 import { ListAllPosts, ListCategoryPosts } from './ListPosts'
 import PostDetails from './PostDetails'
 import EditPost from './EditPost'
 import CreatePost from './CreatePost'
+import CreateComment from './CreateComment'
 import NoMatch from './NoMatch'
 
 class App extends Component {
@@ -59,19 +60,17 @@ class App extends Component {
               )} />
               <Route exact path='/post/edit/:post?' render={() => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}>Main - edit post form view</Paper>
+                  <Paper className={classes.paper}><EditPost /></Paper>
                 </Grid>
               )} />
-              // use modal for addpost
               <Route exact path='/addpost' render={() => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}><div>Main - add post form view</div></Paper>
+                  <Paper className={classes.paper}><CreatePost /></Paper>
                 </Grid>
               )} />
-              // use modal for addcomment
               <Route exact path='/addcomment' render={() => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}><div>Main - add comment form view</div></Paper>
+                  <Paper className={classes.paper}><CreateComment /></Paper>
                 </Grid>
               )} />
               <Route render={() => (
