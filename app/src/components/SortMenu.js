@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton'
 import Menu, { MenuItem } from 'material-ui/Menu'
 import MoreVertIcon from 'material-ui-icons/MoreVert'
-import { changeSortOrder } from './../actions'
 
 const sortTypes = [
   'VOTE_SCORE',
@@ -12,6 +11,7 @@ const sortTypes = [
 const ITEM_HEIGHT = 48;
 
 class SortMenu extends Component {
+
   state = {
     anchorEl: null,
     open: false,
@@ -25,7 +25,6 @@ class SortMenu extends Component {
   handleMenuItemClick = (event, index) => {
     this.setState({ selectedIndex: index, open: false })
     const newSortOrder = index
-    console.log('newSortOrder',newSortOrder)
     this.props.sortPosts(sortTypes[newSortOrder])
   }
 
