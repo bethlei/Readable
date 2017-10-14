@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import { styles } from './../utils/styles'
 
 class CategoryPosts extends Component {
   render() {
     const posts = this.props.posts
     const sortedPostIds = this.props.sortedPostIds
     const { category } = this.props.match.params
+    const classes = this.props.classes
 
     return (
-      <div>
+      <div className={classes.mainContentWrapper}>
         <div>Main - category posts list view</div>
         {sortedPostIds
           .filter(postId => posts[postId].category === category)
@@ -37,4 +41,8 @@ class CategoryPosts extends Component {
   }
 }
 
-export default CategoryPosts
+CategoryPosts.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles)(CategoryPosts)

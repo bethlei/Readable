@@ -50,5 +50,8 @@ export const styles = theme => ({
     '&:focus': {
       color: `rgba(255, 255, 255, 0.92)`,
     },
+  },
+  mainContentWrapper: {
+    minHeight: `calc(100vh - 220px)`
   }
 });

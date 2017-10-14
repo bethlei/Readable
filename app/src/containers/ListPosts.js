@@ -5,6 +5,8 @@ import {
   fetchAllPosts,
   sortTypes,
   changeSortOrder,
+  updatePostScoreToServer,
+  deletePostToServer
 } from './../actions'
 
 const { VOTE_SCORE, TIME_STAMP } = sortTypes
@@ -29,7 +31,6 @@ const getSortedPosts = (allPosts, posts, sortOrder) => {
 }
 
 const mapStateToProps = state => ({
-  categories: state.categories,
   posts: state.posts,
   sortOrder: state.sortOrder,
   sortedPostIds: getSortedPosts(state.allPosts, state.posts, state.sortOrder)
@@ -37,7 +38,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   sortPosts: changeSortOrder,
-  getAllPosts: fetchAllPosts
+  getAllPosts: fetchAllPosts,
+  votePost: updatePostScoreToServer,
+  deletePost: deletePostToServer
 }
 
 export const ListAllPosts = connect(mapStateToProps, mapDispatchToProps)(AllPosts)

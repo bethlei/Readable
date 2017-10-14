@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
 import { styles } from './../utils/styles'
-import Button from 'material-ui/Button';
+import Button from 'material-ui/Button'
 
 const Category = (props) => {
   const categories = ['react', 'redux', 'udacity']
@@ -29,6 +29,6 @@ const Category = (props) => {
 Category.propTypes = {
   children: PropTypes.node,
   classes: PropTypes.object.isRequired,
-};
+}
 
 export default withStyles(styles)(Category);

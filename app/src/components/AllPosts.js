@@ -1,15 +1,23 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import { styles } from './../utils/styles'
+import SortMenu from './SortMenu';
+import { changeSortOrder } from './../actions'
 
 class AllPosts extends Component {
   render() {
     const posts = this.props.posts
     const sortedPostIds = this.props.sortedPostIds
+    const classes = this.props.classes
 
     return (
-      <div>
+      <div className={classes.mainContentWrapper}>
         <div>Main - all posts list view</div>
+        <SortMenu />
         {sortedPostIds.map(postId => (
         <ul key={ posts[postId].id }>
           <li><Link to ={ '/post/' + posts[postId].id } className='post-details'>{ posts[postId].title }</Link></li>
@@ -35,4 +43,12 @@ class AllPosts extends Component {
   }
 }
 
-export default AllPosts
+AllPosts.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+const mapDispatchToProps = {
+  sortPosts: changeSortOrder
+}
+
+export default withStyles(styles)(connect(null, mapDispatchToProps)(AllPosts))
