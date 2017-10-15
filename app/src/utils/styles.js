@@ -125,5 +125,26 @@ export const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     verticalAlign: `super`,
-  }
+  },
+  postWrapper: {
+    display: `flex`,
+    flexFlow: `column nowrap`,
+    alignItems: `center`,
+  },
+  cardPost: {
+    padding: theme.spacing.unit*0,
+    marginBottom: theme.spacing.unit,
+    backgroundColor: theme.palette.common.fullWhite,
+    display: `flex`,
+    flexFlow: `column nowrap`,
+    width: `800px`,
+    maxWidth: `800px`,
+  },
+  cardContent: {
+    padding: theme.spacing.unit*3,
+  },
+  cardControls: {
+    padding: theme.spacing.unit,
+    backgroundColor: `#efefef`,
+  },
 });
