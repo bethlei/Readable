@@ -13,10 +13,21 @@ import Button from 'material-ui/Button'
 import AddIcon from 'material-ui-icons/Add'
 import ModeEditIcon from 'material-ui-icons/ModeEdit'
 import DeleteIcon from 'material-ui-icons/Delete'
+import PersonIcon from 'material-ui-icons/Person'
+import DateRangeIcon from 'material-ui-icons/DateRange'
+import CommentIcon from 'material-ui-icons/Comment'
 import SortMenu from './SortMenu';
-import { changeSortOrder } from './../actions'
+import { changeSortOrder, updatePostScoreToServer } from './../actions'
 
 class CategoryPosts extends Component {
+  upVote = postId => {
+    this.props.updateSinglePostVote(postId, 'upVote')
+  };
+
+  downVote = postId => {
+    this.props.updateSinglePostVote(postId, 'downVote')
+  };
+
   render() {
     const posts = this.props.posts
     const sortedPostIds = this.props.sortedPostIds
@@ -33,25 +44,25 @@ class CategoryPosts extends Component {
         <Card className={classes.cardPost} key={ posts[postId].id }>
           <CardContent className={classes.cardContent}>
             <Link to ={ '/post/' + posts[postId].id } className={classes.postDetails}>{ posts[postId].title }</Link>
-            <div>{ posts[postId].author }</div>
-            <div>{ moment(posts[postId].timestamp).format('MMMM Do YYYY, h:mm:ss a') }</div>
-            <div>{ posts[postId].comments.length }</div>
+            <div><PersonIcon />{ posts[postId].author }</div>
+            <div><DateRangeIcon />{ moment(posts[postId].timestamp).format('MMMM Do YYYY, h:mm:ss a') }</div>
+            <div><CommentIcon />{ posts[postId].comments.length }</div>
             <div>{ posts[postId].body }</div>
           </CardContent>
           <div className={classes.cardControls}>
             <IconButton
               aria-label="Thumb Up"
               className={classes.iconButton}
-              onClick={this.handleClickThumbUp}
-            >
+              value={postId}
+              onClick={() => this.upVote(postId)}>
               <ThumbUpIcon />
             </IconButton>
             <div className={classes.voteScore}>{ posts[postId].voteScore }</div>
             <IconButton
               aria-label="Thumb Down"
               className={classes.iconButton}
-              onClick={this.handleClickThumbDown}
-            >
+              value={postId}
+              onClick={() => this.downVote(postId)}>
               <ThumbDownIcon />
             </IconButton>
             <Link to ='/'>
