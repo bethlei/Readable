@@ -39,7 +39,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   sortPosts: changeSortOrder,
   getAllPosts: fetchAllPosts,
-  votePost: updatePostScoreToServer,
+  updateSinglePostVote: updatePostScoreToServer,
   deletePost: deletePostToServer
 }
 

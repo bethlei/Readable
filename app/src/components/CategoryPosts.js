@@ -31,14 +31,14 @@ class CategoryPosts extends Component {
           .filter(postId => posts[postId].category === category)
           .map(postId => (
         <Card className={classes.cardPost} key={ posts[postId].id }>
-          <CardContent className={classes.content} className={classes.cardContent}>
+          <CardContent className={classes.cardContent}>
             <Link to ={ '/post/' + posts[postId].id } className={classes.postDetails}>{ posts[postId].title }</Link>
             <div>{ posts[postId].author }</div>
             <div>{ moment(posts[postId].timestamp).format('MMMM Do YYYY, h:mm:ss a') }</div>
             <div>{ posts[postId].comments.length }</div>
             <div>{ posts[postId].body }</div>
           </CardContent>
-          <div className={classes.controls} className={classes.cardControls}>
+          <div className={classes.cardControls}>
             <IconButton
               aria-label="Thumb Up"
               className={classes.iconButton}

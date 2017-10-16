@@ -154,9 +154,12 @@ export function deletePost(data) {
 
 export function updatePostScoreToServer(postId, vote) {
   return dispatch => {
-    return updateSinglePostVote(postId, vote)
+    return updateSinglePostVote(postId, { option: vote })
       .then(() => getSinglePost(postId)
       .then(data => dispatch(updatePostScore(data)))
+      .then(() => getCommentsByPost(postId)
+      .then(data => dispatch(getCommentsByPost(data,postId)))
+      )
     )
   }
 }
