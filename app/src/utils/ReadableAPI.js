@@ -64,7 +64,7 @@ export const updateSinglePostVote = (post, vote) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(post)
+    body: JSON.stringify(vote)
   }).then(res => res.json())
 
 export const editSinglePost = post =>
@@ -118,7 +118,7 @@ export const updateSingleCommentVote = (comment, vote) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(comment)
+    body: JSON.stringify(vote)
   }).then(res => res.json())
 
 export const deleteSingleComment = comment =>

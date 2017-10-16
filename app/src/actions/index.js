@@ -157,7 +157,7 @@ export function updatePostScoreToServer(postId, vote) {
     return updateSinglePostVote(postId, { option: vote })
       .then(() => getSinglePost(postId)
       .then(data => dispatch(updatePostScore(data)))
-      .then(() => getCommentsByPost(postId)
+      .then(() => getAllCommentsByPost(postId)
       .then(data => dispatch(getCommentsByPost(data,postId)))
       )
     )
