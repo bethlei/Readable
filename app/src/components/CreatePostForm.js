@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import { styles } from './../utils/styles'
+import Grid from 'material-ui/Grid'
 import TextField from 'material-ui/TextField'
 import Select from 'material-ui/Select'
 import MenuItem from 'material-ui/Menu/MenuItem'
@@ -24,7 +25,7 @@ class CreatePostForm extends Component {
   renderSelect = ({ input, label, meta: { touched, error }, children, ...custom }) => (
     <FormControl
       style={{
-        width: `600px`,
+        width: `75%`,
         marginBottom: `24px`,
       }}
     >
@@ -44,6 +45,8 @@ class CreatePostForm extends Component {
     const categories = ['react', 'redux', 'udacity']
 
     return (
+      <div className={classes.mainContentWrapper}>
+      <Grid item xs={12}>
       <form className={classes.formWrapper}>
         <Field
           name='title'
@@ -86,6 +89,8 @@ class CreatePostForm extends Component {
           </Button>
         </div>
       </form>
+      </Grid>
+      </div>
     )
   }
 }

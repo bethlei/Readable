@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import { styles } from './../utils/styles'
+import Grid from 'material-ui/Grid'
 import Card, { CardContent } from 'material-ui/Card'
 import IconButton from 'material-ui/IconButton'
 import ThumbUpIcon from 'material-ui-icons/ThumbUp'
@@ -36,6 +37,7 @@ class CategoryPosts extends Component {
 
     return (
       <div className={classes.mainContentWrapper}>
+      <Grid item xs={12}>
         <SortMenu sortPosts={this.props.sortPosts} />
         <div className={classes.postWrapper}>
         {sortedPostIds
@@ -43,11 +45,11 @@ class CategoryPosts extends Component {
           .map(postId => (
         <Card className={classes.cardPost} key={ posts[postId].id }>
           <CardContent className={classes.cardContent}>
-            <Link to ={ '/post/' + posts[postId].id } className={classes.postDetails}>{ posts[postId].title }</Link>
-            <div><PersonIcon />{ posts[postId].author }</div>
-            <div><DateRangeIcon />{ moment(posts[postId].timestamp).format('MMMM Do YYYY, h:mm:ss a') }</div>
-            <div><CommentIcon />{ posts[postId].comments.length }</div>
-            <div>{ posts[postId].body }</div>
+            <Link to ={ '/post/' + posts[postId].id } className={classes.postTitle}>{ posts[postId].title }</Link>
+            <div className={classes.postInfo}><PersonIcon /><span className={classes.postInfoText}>{ posts[postId].author }</span></div>
+            <div className={classes.postInfo}><DateRangeIcon /><span className={classes.postInfoText}>{ moment(posts[postId].timestamp).format('MMMM Do YYYY, h:mm:ss a') }</span></div>
+            <div className={classes.postInfo}><CommentIcon /><span className={classes.postInfoText}>{ posts[postId].comments.length } comments</span></div>
+            <div className={classes.postBody}>{ posts[postId].body }</div>
           </CardContent>
           <div className={classes.cardControls}>
             <IconButton
@@ -84,6 +86,7 @@ class CategoryPosts extends Component {
             <AddIcon />
           </Button>
         </Link>
+      </Grid>
       </div>
     )
   }

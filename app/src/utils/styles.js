@@ -57,6 +57,9 @@ export const styles = theme => ({
   },
   mainContentWrapper: {
     minHeight: `calc(100vh - 188px)`,
+    maxWidth: `860px`,
+    marginRight: `auto`,
+    marginLeft: `auto`,
   },
   sortWrapper: {
     paddingLeft: theme.spacing.unit*0,
@@ -100,8 +103,8 @@ export const styles = theme => ({
       backgroundColor: accentHover,
     },
     position: `fixed`,
-    top: `200px`,
-    right: `200px`,
+    bottom: `40px`,
+    right: `40px`,
   },
   deletePostIcon: {
     backgroundColor: primary,
@@ -110,6 +113,7 @@ export const styles = theme => ({
     },
     width: `40px`,
     height: `40px`,
+    marginLeft: `24px`,
   },
   editPostIcon: {
     backgroundColor: primary,
@@ -118,7 +122,7 @@ export const styles = theme => ({
     },
     width: `40px`,
     height: `40px`,
-    marginLeft: `8px`,
+    marginLeft: `16px`,
   },
   voteScore: {
     display: `inline-block`,
@@ -137,34 +141,67 @@ export const styles = theme => ({
     backgroundColor: theme.palette.common.fullWhite,
     display: `flex`,
     flexFlow: `column nowrap`,
-    width: `800px`,
-    maxWidth: `800px`,
+    width: `100%`,
+    maxWidth: `96vw`,
   },
   cardContent: {
     padding: theme.spacing.unit*3,
+    textAlign: `left`,
+  },
+  postTitle: {
+    fontSize: `1.5rem`,
+    fontWeight: `400`,
+    color: primary,
+    textDecoration: `none`,
+    display: `block`,
+  },
+  postInfo: {
+    fontSize: `0.7rem`,
+    color: `#999`,
+    display: `inline-block`,
+    marginLeft: `-4px`,
+    marginRight: `20px`,
+  },
+  postInfoText: {
+    verticalAlign: `super`,
+    marginLeft: `4px`,
+  },
+  postBody: {
+    fontSize: `0.9rem`,
+    paddingTop: theme.spacing.unit*2,
   },
   cardControls: {
-    padding: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit*3,
+    paddingRight: theme.spacing.unit*3,
+    paddingTop: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    textAlign: `left`,
     backgroundColor: `#efefef`,
+    display: `inline-flex`,
+    flexDirection: `row`,
+    alignItems: `center`,
+    justifyContent: `flex-end`,
+  },
+  voteScore: {
+    color: primary,
+    paddingLeft: `2px`,
+    paddingRight: `2px`,
   },
   formWrapper: {
     display: `flex`,
     flexFlow: `column nowrap`,
     alignItems: `center`,
-    marginTop: theme.spacing.unit*4,
+    paddingTop: theme.spacing.unit*4,
   },
   textField: {
-    width: `600px`,
+    width: `75%`,
     marginBottom: theme.spacing.unit*3,
-  },
-  MuiInputFormControl: {
-    backgroundColor: accent,
   },
   buttonGroup: {
     flexDirection: `row`,
   },
   submitButton: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing.unit*2,
     backgroundColor: primary,
     '&:hover': {
       backgroundColor: primaryHover,
