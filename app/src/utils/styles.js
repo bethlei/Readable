@@ -147,4 +147,33 @@ export const styles = theme => ({
     padding: theme.spacing.unit,
     backgroundColor: `#efefef`,
   },
+  formWrapper: {
+    display: `flex`,
+    flexFlow: `column nowrap`,
+    alignItems: `center`,
+    marginTop: theme.spacing.unit*4,
+  },
+  textField: {
+    width: `600px`,
+    marginBottom: theme.spacing.unit*3,
+  },
+  MuiInputFormControl: {
+    backgroundColor: accent,
+  },
+  buttonGroup: {
+    flexDirection: `row`,
+  },
+  submitButton: {
+    marginLeft: theme.spacing.unit,
+    backgroundColor: primary,
+    '&:hover': {
+      backgroundColor: primaryHover,
+    },
+  },
+  cancelButton: {
+    backgroundColor: accent,
+    '&:hover': {
+      backgroundColor: accentHover,
+    },
+  }
 });
