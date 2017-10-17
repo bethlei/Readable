@@ -67,9 +67,9 @@ class App extends Component {
                   <Paper className={classes.paper}><CreatePost /></Paper>
                 </Grid>
               )} />
-              <Route render={() => (
+              <Route render={(props) => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}><NoMatch /></Paper>
+                  <Paper className={classes.paper}><NoMatch {...props} /></Paper>
                 </Grid>
               )} />
             </Switch>

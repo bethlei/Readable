@@ -225,5 +225,36 @@ export const styles = theme => ({
     },
     textTransform: `lowercase`,
     height: `32px`,
-  }
+  },
+  errorContainer: {
+    backgroundColor: primary,
+    height: `calc(100vh - 188px)`,
+    width: `100vw`,
+    opacity: 0.9,
+    textAlign: `center`,
+    color: theme.palette.common.fullWhite,
+  },
+  error404: {
+    fontSize: `220px`,
+    fontWeight: 300,
+    top: `15vh`,
+    margin: 0,
+    position: `relative`,
+  },
+  errorReturn: {
+    bottom: `-10vh`,
+    position: `relative`,
+    color: `rgba(255, 255, 255, 0.6)`,
+    fontSize: `20px`,
+    fontWeight: 300,
+    letterSpacing: `-0.04em`,
+    margin: 0,
+  },
+  errorReturnLink: {
+    paddingBottom: `1px`,
+    color: theme.palette.common.fullWhite,
+    textDecoration: `none`,
+    borderBottom: `1px solid rgba(255, 255, 255, 0.6)`,
+    transition: `border-color 0.1s ease-in`,
+  },
 });
