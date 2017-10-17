@@ -167,8 +167,10 @@ export const styles = theme => ({
     marginLeft: `4px`,
   },
   postBody: {
-    fontSize: `0.9rem`,
+    fontSize: `1.1rem`,
     paddingTop: theme.spacing.unit*2,
+    fontWeight: 300,
+    color: `rgba(0, 0, 0, 0.87)`,
   },
   cardControls: {
     paddingLeft: theme.spacing.unit*3,
