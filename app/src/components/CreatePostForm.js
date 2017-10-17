@@ -28,14 +28,14 @@ class CreatePostForm extends Component {
         marginBottom: `24px`,
       }}
     >
-    <InputLabel htmlFor="age-simple">Category</InputLabel>
+    <InputLabel htmlFor="category">Category</InputLabel>
     <Select
       label={label}
       {...input}
       onChange={(event, index, value) => input.onChange(value)}
       children={children}
       {...custom}
-      input={<Input id="age-simple" />} />
+      input={<Input id="category" />} />
       </FormControl>
   )
 
@@ -52,7 +52,7 @@ class CreatePostForm extends Component {
           type='text'
           className={classes.textField}
         />
-        
+
         <Field
           name='author'
           label='Author'
@@ -62,9 +62,9 @@ class CreatePostForm extends Component {
         />
 
         <Field name="favoriteColor" component={this.renderSelect} label="Favorite Color">
-          <MenuItem value={`react`}>React</MenuItem>
-          <MenuItem value={`redux`}>Redux</MenuItem>
-          <MenuItem value={`udacity`}>Udacity</MenuItem>
+          <MenuItem value={`react`} className={classes.categoryMenuItem}>React</MenuItem>
+          <MenuItem value={`redux`} className={classes.categoryMenuItem}>Redux</MenuItem>
+          <MenuItem value={`udacity`} className={classes.categoryMenuItem}>Udacity</MenuItem>
         </Field>
 
         <Field

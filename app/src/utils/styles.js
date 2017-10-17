@@ -175,5 +175,16 @@ export const styles = theme => ({
     '&:hover': {
       backgroundColor: accentHover,
     },
+  },
+  categoryMenuItem: {
+    fontWeight: `300`,
+    '&:focus': {
+      backgroundColor: `#eee`,
+    },
+    '&:hover': {
+      backgroundColor: `#e3f2fd`,
+    },
+    textTransform: `lowercase`,
+    height: `32px`,
   }
 });
