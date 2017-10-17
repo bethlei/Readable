@@ -11,7 +11,7 @@ import Category from './../components/Category'
 import { ListAllPosts, ListCategoryPosts } from './ListPosts'
 import PostDetails from './PostDetails'
 import EditPost from './EditPost'
-import CreatePost from './CreatePost'
+import { CreatePost } from './CreatePost'
 import NoMatch from './NoMatch'
 
 class App extends Component {

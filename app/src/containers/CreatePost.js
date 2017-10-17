@@ -2,14 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import CreatePostForm from './../components/CreatePostForm'
 import {
+  addPostToServer,
   fetchAllPosts,
-
 } from './../actions'
 
-const CreatePost = () => {
-  return (
-    <CreatePostForm />
-  )
+const mapStateToProps = (posts, allPosts) => ({
+  posts,
+  allPosts,
+})
+
+const mapDispatchToProps = {
+  setPost: addPostToServer,
+  getAllPosts: fetchAllPosts,
 }
 
-export default CreatePost
+export const CreatePost = connect(mapStateToProps, mapDispatchToProps)(CreatePostForm)

@@ -17,7 +17,7 @@ import PersonIcon from 'material-ui-icons/Person'
 import DateRangeIcon from 'material-ui-icons/DateRange'
 import CommentIcon from 'material-ui-icons/Comment'
 import SortMenu from './SortMenu';
-import { changeSortOrder, updatePostScoreToServer } from './../actions'
+import { changeSortOrder } from './../actions'
 
 class CategoryPosts extends Component {
   upVote = postId => {
