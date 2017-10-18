@@ -30,27 +30,29 @@ class CreatePostForm extends Component {
     />
   )
 
-  renderSelect = ({ input, label, meta: { touched, error }, children, ...custom }) => (
+  function renderSelect({ input, label, meta: { touched, error }, children, ...custom }) {
     const categories = ['react', 'redux', 'udacity']
-    <FormControl style={{width: `75%`,marginBottom: `24px`,}}>
-      <InputLabel htmlFor='category'>Category</InputLabel>
-      <Select
-        label={label}
-        helperText={touched && error}
-        {...input}
-        children={children}
-        {...custom}
-        value={this.state.category}
-        onChange={this.handleChange('category')}
-        input={<Input id='category' type='text' style={{textAlign:`left`,}}/>}
-      />
-      {categories.map(option => (
-        <MenuItem key={option} value={option} className={classes.categoryMenuItem}>
-          {option}
-        </MenuItem>
-      ))}
-    </FormControl>
-  )
+    return (
+      <FormControl style={{width: `75%`,marginBottom: `24px`,}}>
+        <InputLabel htmlFor='category'>Category</InputLabel>
+        <Select
+          label={label}
+          helperText={touched && error}
+          {...input}
+          children={children}
+          {...custom}
+          value={this.state.category}
+          onChange={this.handleChange('category')}
+          input={<Input id='category' type='text' style={{textAlign:`left`,}}/>}
+        />
+        {categories.map(option => (
+          <MenuItem key={option} value={option} className={classes.categoryMenuItem}>
+            {option}
+          </MenuItem>
+        ))}
+      </FormControl>
+    )
+  }
 
   onSubmit(values) {
     console.log('form values', values)
