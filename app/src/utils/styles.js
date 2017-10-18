@@ -1,7 +1,9 @@
 import { blue, purple } from 'material-ui/colors'
 
-export const primary = `#0099ff`;
+export const primary = `#0099ff`
 export const primaryHover = `#1976d2`
+export const secondary = `#4caf50`
+export const secondaryHover = `#388e3c`
 export const accent = purple[`A200`]
 export const accentHover = purple[`A400`]
 
@@ -33,14 +35,15 @@ export const styles = theme => ({
   },
   category: {
     display: `flex`,
-    flexFlow: `row wrap`,
+    flexFlow: `row nowrap`,
     justifyContent: `center`,
     backgroundColor: blue[500], // #2196f3
   },
   button: {
-    margin: theme.spacing.unit*2,
+    margin: `11px`,
     fontSize: `1rem`,
     color: `rgba(255, 255, 255, 0.7)`,
+    whiteSpace: `nowrap`,
   },
   catLabel: {
     textTransform: `uppercase`,
