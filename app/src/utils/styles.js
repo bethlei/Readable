@@ -16,7 +16,7 @@ export const styles = theme => ({
     fontFamily: theme.typography.fontFamily,
   },
   paper: {
-    padding: theme.spacing.unit*0,
+    padding: 0,
     textAlign: `center`,
     color: theme.palette.text.secondary,
     backgroundColor: `#f5f5f5`,
@@ -65,8 +65,8 @@ export const styles = theme => ({
     marginLeft: `auto`,
   },
   sortWrapper: {
-    paddingLeft: theme.spacing.unit*0,
-    paddingRight: theme.spacing.unit*0,
+    paddingLeft: 0,
+    paddingRight: 0,
     paddingTop: theme.spacing.unit*3,
     paddingBottom: theme.spacing.unit*3,
   },
@@ -127,19 +127,13 @@ export const styles = theme => ({
     height: `40px`,
     marginLeft: `16px`,
   },
-  voteScore: {
-    display: `inline-block`,
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    verticalAlign: `super`,
-  },
   postWrapper: {
     display: `flex`,
     flexFlow: `column nowrap`,
     alignItems: `center`,
   },
   cardPost: {
-    padding: theme.spacing.unit*0,
+    padding: 0,
     marginBottom: theme.spacing.unit,
     backgroundColor: theme.palette.common.fullWhite,
     display: `flex`,
@@ -228,6 +222,8 @@ export const styles = theme => ({
     },
     textTransform: `lowercase`,
     height: `32px`,
+    paddingTop: `0`,
+    paddingBottom: `0`,
   },
   errorContainer: {
     backgroundColor: primary,

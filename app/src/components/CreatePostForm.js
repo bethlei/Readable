@@ -7,47 +7,62 @@ import Grid from 'material-ui/Grid'
 import TextField from 'material-ui/TextField'
 import Select from 'material-ui/Select'
 import MenuItem from 'material-ui/Menu/MenuItem'
-import Input from 'material-ui/Input'
-import { InputLabel } from 'material-ui/Input'
-import { FormControl } from 'material-ui/Form'
+import Input, { InputLabel } from 'material-ui/Input'
+import { FormControl, FormHelperText } from 'material-ui/Form'
 import Button from 'material-ui/Button'
 import asyncValidate from './../utils/asyncValidate'
 
 class CreatePostForm extends Component {
+  state = {
+    category: '',
+  };
+
+  handleChange = category => event => {
+    this.setState({ [category]: event.target.value });
+  };
+
   renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
     <TextField
       label={label}
+      helperText={touched && error}
       {...input}
       {...custom}
     />
   )
 
   renderSelect = ({ input, label, meta: { touched, error }, children, ...custom }) => (
-    <FormControl
-      style={{
-        width: `75%`,
-        marginBottom: `24px`,
-      }}
-    >
-    <InputLabel htmlFor="category">Category</InputLabel>
-    <Select
-      label={label}
-      {...input}
-      onChange={(event, index, value) => input.onChange(value)}
-      children={children}
-      {...custom}
-      input={<Input id="category" />} />
-      </FormControl>
+    <FormControl style={{width: `75%`,marginBottom: `24px`,}}>
+      <InputLabel htmlFor='category'>Category</InputLabel>
+      <Select
+        label={label}
+        helperText={touched && error}
+        {...input}
+        children={children}
+        {...custom}
+        value={this.state.category}
+        onChange={this.handleChange('category')}
+        input={<Input id='category' type='text' style={{textAlign:`left`,}}/>}
+      />
+    </FormControl>
   )
+
+  onSubmit(values) {
+    console.log('form values', values)
+
+    this.props.addPostToServer(values, () => {
+      this.props.history.push("/");
+    });
+  }
 
   render() {
     const classes = this.props.classes
     const categories = ['react', 'redux', 'udacity']
+    const { handleSubmit } = this.props
 
     return (
       <div className={classes.mainContentWrapper}>
       <Grid item xs={12}>
-      <form className={classes.formWrapper}>
+      <form className={classes.formWrapper} onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           name='title'
           label='Title'
@@ -64,10 +79,16 @@ class CreatePostForm extends Component {
           className={classes.textField}
         />
 
-        <Field name="favoriteColor" component={this.renderSelect} label="Favorite Color">
-          <MenuItem value={`react`} className={classes.categoryMenuItem}>React</MenuItem>
-          <MenuItem value={`redux`} className={classes.categoryMenuItem}>Redux</MenuItem>
-          <MenuItem value={`udacity`} className={classes.categoryMenuItem}>Udacity</MenuItem>
+        <Field
+          name='category'
+          label='Category'
+          component={this.renderSelect}
+        >
+          {categories.map(option => (
+            <MenuItem key={option} value={option} className={classes.categoryMenuItem}>
+              {option}
+            </MenuItem>
+          ))}
         </Field>
 
         <Field
@@ -84,7 +105,7 @@ class CreatePostForm extends Component {
           <Button raised color="accent" className={classes.cancelButton}>
             Cancel
           </Button>
-          <Button raised color="primary" className={classes.submitButton}>
+          <Button type="submit" raised color="primary" className={classes.submitButton}>
             Submit
           </Button>
         </div>
@@ -97,15 +118,12 @@ class CreatePostForm extends Component {
 
 const validate = values => {
   const errors = {}
-  const requiredFields = [ 'title', 'author', 'body' ]
+  const requiredFields = [ 'title', 'author', 'category', 'body' ]
   requiredFields.forEach(field => {
     if (!values[ field ]) {
       errors[ field ] = 'Required'
     }
   })
-  if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
-  }
   return errors
 }
 
