@@ -31,6 +31,7 @@ class CreatePostForm extends Component {
   )
 
   renderSelect = ({ input, label, meta: { touched, error }, children, ...custom }) => (
+    const categories = ['react', 'redux', 'udacity']
     <FormControl style={{width: `75%`,marginBottom: `24px`,}}>
       <InputLabel htmlFor='category'>Category</InputLabel>
       <Select
@@ -43,6 +44,11 @@ class CreatePostForm extends Component {
         onChange={this.handleChange('category')}
         input={<Input id='category' type='text' style={{textAlign:`left`,}}/>}
       />
+      {categories.map(option => (
+        <MenuItem key={option} value={option} className={classes.categoryMenuItem}>
+          {option}
+        </MenuItem>
+      ))}
     </FormControl>
   )
 
@@ -56,7 +62,7 @@ class CreatePostForm extends Component {
 
   render() {
     const classes = this.props.classes
-    const categories = ['react', 'redux', 'udacity']
+    // const categories = ['react', 'redux', 'udacity']
     const { handleSubmit } = this.props
 
     return (
@@ -83,12 +89,9 @@ class CreatePostForm extends Component {
           name='category'
           label='Category'
           component={this.renderSelect}
+          type='text'
         >
-          {categories.map(option => (
-            <MenuItem key={option} value={option} className={classes.categoryMenuItem}>
-              {option}
-            </MenuItem>
-          ))}
+
         </Field>
 
         <Field
