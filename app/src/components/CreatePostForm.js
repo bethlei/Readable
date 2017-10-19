@@ -46,7 +46,7 @@ class CreatePostForm extends Component {
         onChange={this.handleChange('category',this.state.category)}
         input={<Input id='category' style={{textAlign:`left`,}}/>}
       />
-      {touched && (error && <FormHelperText style={{color:`red`, marginTop:`8px`,}}>{error}</FormHelperText>)}
+      {touched && (error && <FormHelperText style={{color:`red`,}}>{error}</FormHelperText>)}
     </FormControl>
   )
 
