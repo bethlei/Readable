@@ -28,7 +28,7 @@ class CreatePostForm extends Component {
     return (
       <TextField
         label={label}
-        helperText={touched && (error && <FormHelperText style={{color:`red`, marginTop:0,}}>{error}</FormHelperText>)}
+        helperText={touched && (error && <span style={{color:`red`,}}>{error}</span>)}
         {...input}
         {...custom}
       />
