@@ -62,9 +62,9 @@ class App extends Component {
                   <Paper className={classes.paper}><EditPost /></Paper>
                 </Grid>
               )} />
-              <Route exact path='/addpost' render={() => (
+              <Route exact path='/addpost' render={(props) => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}><CreatePost /></Paper>
+                  <Paper className={classes.paper}><CreatePost {...props} /></Paper>
                 </Grid>
               )} />
               <Route render={(props) => (

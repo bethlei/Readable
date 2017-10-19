@@ -12,6 +12,7 @@ import Input, { InputLabel } from 'material-ui/Input'
 import { FormControl, FormHelperText } from 'material-ui/Form'
 import Button from 'material-ui/Button'
 import asyncValidate from './../utils/asyncValidate'
+import { addPostToServer } from './../actions'
 
 class CreatePostForm extends Component {
   state = {
@@ -51,8 +52,9 @@ class CreatePostForm extends Component {
 
   onSubmit(values) {
     console.log('form values', values)
+    console.log('props', this.props)
 
-    this.props.addPostToServer(values, () => {
+    this.props.setPost(values, () => {
       this.props.history.push("/");
     });
   }

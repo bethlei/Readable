@@ -89,14 +89,14 @@ export function getPostsByCategory(data, category) {
   }
 }
 
-export function addPostToServer(post) {
+export function addPostToServer(post, callback) {
   return dispatch => {
     const id = generateId()
     const timestamp = moment().unix()
     return addSinglePost({ ...post, id, timestamp })
       .then(() => getSinglePost(id)
       .then(data => dispatch(addPost(data)))
-    )
+    ).then(() => callback())
   }
 }
 
