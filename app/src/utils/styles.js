@@ -91,6 +91,8 @@ export const styles = theme => ({
     },
     textTransform: `lowercase`,
     height: `32px`,
+    paddingTop: `0`,
+    paddingBottom: `0`,
   },
   iconButton: {
     color: `rgba(0, 0, 0, 0.24)`,
