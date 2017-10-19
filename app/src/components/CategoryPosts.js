@@ -71,11 +71,9 @@ class CategoryPosts extends Component {
               onClick={() => this.downVote(postId)}>
               <ThumbDownIcon />
             </IconButton>
-            <Link to ='/'>
-              <Button onClick={() => this.deleteSinglePost(postId)} fab color="primary" aria-label="delete" className={classes.deletePostIcon}>
-                <DeleteIcon />
-              </Button>
-            </Link>
+            <Button onClick={() => this.deleteSinglePost(postId)} fab color="primary" aria-label="delete" className={classes.deletePostIcon}>
+              <DeleteIcon />
+            </Button>
             <Link to ={ '/post/edit/' + posts[postId].id }>
               <Button fab color="primary" aria-label="edit" className={classes.editPostIcon}>
                 <ModeEditIcon />
