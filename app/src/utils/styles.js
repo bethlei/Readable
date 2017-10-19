@@ -188,11 +188,19 @@ export const styles = theme => ({
     paddingLeft: `2px`,
     paddingRight: `2px`,
   },
+  sectionHeader: {
+    margin: 0,
+    paddingTop: `24px`,
+    paddingBottom: `24px`,
+    color: primary,
+    fontWeight: 300,
+    fontSize: `2.875rem`,
+    opacity: 0.84,
+  },
   formWrapper: {
     display: `flex`,
     flexFlow: `column nowrap`,
     alignItems: `center`,
-    paddingTop: theme.spacing.unit*4,
   },
   textField: {
     width: `75%`,

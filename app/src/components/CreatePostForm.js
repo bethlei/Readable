@@ -64,6 +64,9 @@ class CreatePostForm extends Component {
     return (
       <div className={classes.mainContentWrapper}>
       <Grid item xs={12}>
+        <h1 className={classes.sectionHeader}>Add New Post</h1>
+      </Grid>
+      <Grid item xs={12}>
       <form className={classes.formWrapper} onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           name='title'
