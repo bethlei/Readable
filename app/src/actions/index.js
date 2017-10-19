@@ -92,7 +92,7 @@ export function getPostsByCategory(data, category) {
 export function addPostToServer(post, callback) {
   return dispatch => {
     const id = generateId()
-    const timestamp = moment().unix()
+    const timestamp = (moment().unix()) * 1000
     return addSinglePost({ ...post, id, timestamp })
       .then(() => getSinglePost(id)
       .then(data => dispatch(addPost(data)))
@@ -190,7 +190,7 @@ export function getCommentsByPost(data, parentId) {
 export function addCommentToServer(comment) {
   return dispatch => {
     const id = generateId()
-    const timestamp = moment().unix()
+    const timestamp = (moment().unix()) * 1000
     return addSingleComment({ ...comment, id, timestamp })
       .then(() => getSingleComment(id)
       .then(data => dispatch(addComment(data)))
@@ -209,7 +209,7 @@ export function addComment(data) {
 
 export function editCommentToServer(commentId, newComment) {
   return dispatch => {
-    const timestamp = moment().unix()
+    const timestamp = (moment().unix()) * 1000
     return editSingleComment(commentId, { ...newComment, timestamp })
       .then(() => getSingleComment(commentId)
       .then(data => dispatch(editComment(data)))

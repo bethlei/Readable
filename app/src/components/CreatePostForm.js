@@ -51,9 +51,6 @@ class CreatePostForm extends Component {
   )
 
   onSubmit(values) {
-    console.log('form values', values)
-    console.log('props', this.props)
-
     this.props.setPost(values, () => {
       this.props.history.push("/");
     });
