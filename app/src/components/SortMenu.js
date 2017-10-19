@@ -9,7 +9,7 @@ import { styles } from './../utils/styles'
 const sortTypes = [
   'VOTE_SCORE',
   'TIME_STAMP'
-];
+]
 
 const ITEM_HEIGHT = 48;
 
@@ -19,11 +19,11 @@ class SortMenu extends Component {
     anchorEl: null,
     open: false,
     selectedIndex: 0,
-  };
+  }
 
   handleClick = event => {
     this.setState({ open: true, anchorEl: event.currentTarget })
-  };
+  }
 
   handleMenuItemClick = (event, index) => {
     this.setState({ selectedIndex: index, open: false })
@@ -33,7 +33,7 @@ class SortMenu extends Component {
 
   handleRequestClose = () => {
     this.setState({ open: false })
-  };
+  }
 
   render() {
     const classes = this.props.classes
@@ -80,4 +80,4 @@ SortMenu.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(SortMenu);
+export default withStyles(styles)(SortMenu)

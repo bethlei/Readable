@@ -23,7 +23,7 @@ const Category = (props) => {
         }} key={category}>{props.children ? props.children : <Link className={classes.catLink} to={'/category/' + category}>{category}</Link>}</Button>
       ))}
     </div>
-  );
+  )
 }
 
 Category.propTypes = {
@@ -31,4 +31,4 @@ Category.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(Category);
+export default withStyles(styles)(Category)

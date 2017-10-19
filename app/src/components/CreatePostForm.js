@@ -12,7 +12,6 @@ import Input, { InputLabel } from 'material-ui/Input'
 import { FormControl, FormHelperText } from 'material-ui/Form'
 import Button from 'material-ui/Button'
 import asyncValidate from './../utils/asyncValidate'
-import { addPostToServer } from './../actions'
 
 class CreatePostForm extends Component {
   state = {
@@ -21,7 +20,7 @@ class CreatePostForm extends Component {
 
   handleChange = category => event => {
     let newCat = this.props.change('category', event.target.value)
-    this.setState({ category: newCat });
+    this.setState({ category: newCat })
   };
 
   renderTextField({ input, label, meta: { touched, error }, ...custom }) {
@@ -136,7 +135,7 @@ const validate = values => {
 
 CreatePostForm.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
 export default withStyles(styles)(reduxForm({
   form: 'AddPostForm',

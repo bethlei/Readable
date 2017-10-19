@@ -23,11 +23,15 @@ import { changeSortOrder } from './../actions'
 class CategoryPosts extends Component {
   upVote = postId => {
     this.props.updateSinglePostVote(postId, 'upVote')
-  };
+  }
 
   downVote = postId => {
     this.props.updateSinglePostVote(postId, 'downVote')
-  };
+  }
+
+  deleteSinglePost = postId => {
+    this.props.deletePost(postId)
+  }
 
   render() {
     const posts = this.props.posts
@@ -68,7 +72,7 @@ class CategoryPosts extends Component {
               <ThumbDownIcon />
             </IconButton>
             <Link to ='/'>
-              <Button fab color="primary" aria-label="delete" className={classes.deletePostIcon}>
+              <Button onClick={() => this.deleteSinglePost(postId)} fab color="primary" aria-label="delete" className={classes.deletePostIcon}>
                 <DeleteIcon />
               </Button>
             </Link>

@@ -17,6 +17,6 @@ const NoMatch = (props) => {
 
 NoMatch.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
 export default withStyles(styles)(NoMatch)

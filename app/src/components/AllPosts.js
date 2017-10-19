@@ -18,16 +18,20 @@ import PersonIcon from 'material-ui-icons/Person'
 import DateRangeIcon from 'material-ui-icons/DateRange'
 import CommentIcon from 'material-ui-icons/Comment'
 import SortMenu from './SortMenu';
-import { changeSortOrder, updatePostScoreToServer } from './../actions'
+import { changeSortOrder } from './../actions'
 
 class AllPosts extends Component {
   upVote = postId => {
     this.props.updateSinglePostVote(postId, 'upVote')
-  };
+  }
 
   downVote = postId => {
     this.props.updateSinglePostVote(postId, 'downVote')
-  };
+  }
+
+  deleteSinglePost = postId => {
+    this.props.deletePost(postId)
+  }
 
   render() {
     const posts = this.props.posts
@@ -65,7 +69,7 @@ class AllPosts extends Component {
               <ThumbDownIcon />
             </IconButton>
             <Link to ='/'>
-              <Button fab color="primary" aria-label="delete" className={classes.deletePostIcon}>
+              <Button onClick={() => this.deleteSinglePost(postId)} fab color="primary" aria-label="delete" className={classes.deletePostIcon}>
                 <DeleteIcon />
               </Button>
             </Link>
@@ -94,8 +98,7 @@ AllPosts.propTypes = {
 }
 
 const mapDispatchToProps = {
-  sortPosts: changeSortOrder,
-  updateSinglePostVote: updatePostScoreToServer,
+  sortPosts: changeSortOrder
 }
 
 export default withStyles(styles)(connect(null, mapDispatchToProps)(AllPosts))
