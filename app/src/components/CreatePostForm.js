@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import { styles } from './../utils/styles'
@@ -18,41 +19,35 @@ class CreatePostForm extends Component {
   };
 
   handleChange = category => event => {
-    this.setState({ [category]: event.target.value });
+    let newCat = this.props.change('category', event.target.value)
+    this.setState({ category: newCat });
   };
 
-  renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
-    <TextField
-      label={label}
-      helperText={touched && error}
-      {...input}
-      {...custom}
-    />
-  )
-
-  function renderSelect({ input, label, meta: { touched, error }, children, ...custom }) {
-    const categories = ['react', 'redux', 'udacity']
+  renderTextField({ input, label, meta: { touched, error }, ...custom }) {
     return (
-      <FormControl style={{width: `75%`,marginBottom: `24px`,}}>
-        <InputLabel htmlFor='category'>Category</InputLabel>
-        <Select
-          label={label}
-          helperText={touched && error}
-          {...input}
-          children={children}
-          {...custom}
-          value={this.state.category}
-          onChange={this.handleChange('category')}
-          input={<Input id='category' type='text' style={{textAlign:`left`,}}/>}
-        />
-        {categories.map(option => (
-          <MenuItem key={option} value={option} className={classes.categoryMenuItem}>
-            {option}
-          </MenuItem>
-        ))}
-      </FormControl>
+      <TextField
+        label={label}
+        helperText={touched && (error && <FormHelperText style={{color:`red`, marginTop:0,}}>{error}</FormHelperText>)}
+        {...input}
+        {...custom}
+      />
     )
   }
+
+  renderSelect = ({ input, label, meta: { touched, error }, children, ...custom }) => (
+    <FormControl style={{width: `75%`,marginBottom: `24px`,}}>
+      <InputLabel htmlFor='category'>Category</InputLabel>
+      <Select
+        label={label}
+        {...input}
+        children={children}
+        {...custom}
+        onChange={this.handleChange('category',this.state.category)}
+        input={<Input id='category' style={{textAlign:`left`,}}/>}
+      />
+      {touched && (error && <FormHelperText style={{color:`red`, marginTop:`8px`,}}>{error}</FormHelperText>)}
+    </FormControl>
+  )
 
   onSubmit(values) {
     console.log('form values', values)
@@ -64,7 +59,7 @@ class CreatePostForm extends Component {
 
   render() {
     const classes = this.props.classes
-    // const categories = ['react', 'redux', 'udacity']
+    const categories = ['react', 'redux', 'udacity']
     const { handleSubmit } = this.props
 
     return (
@@ -91,9 +86,12 @@ class CreatePostForm extends Component {
           name='category'
           label='Category'
           component={this.renderSelect}
-          type='text'
         >
-
+          {categories.map(option => (
+            <MenuItem key={option} value={option} className={classes.categoryMenuItem}>
+              {option}
+            </MenuItem>
+          ))}
         </Field>
 
         <Field
@@ -107,9 +105,11 @@ class CreatePostForm extends Component {
         />
 
         <div className={classes.buttonGroup}>
-          <Button raised color="accent" className={classes.cancelButton}>
-            Cancel
-          </Button>
+          <Link to='/' className={classes.cancelButtonWrapper}>
+            <Button raised color="accent" className={classes.cancelButton}>
+              Cancel
+            </Button>
+          </Link>
           <Button type="submit" raised color="primary" className={classes.submitButton}>
             Submit
           </Button>
@@ -138,6 +138,6 @@ CreatePostForm.propTypes = {
 
 export default withStyles(styles)(reduxForm({
   form: 'AddPostForm',
-  validate,
   asyncValidate,
+  validate,
 })(CreatePostForm))

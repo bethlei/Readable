@@ -206,6 +206,9 @@ export const styles = theme => ({
       backgroundColor: primaryHover,
     },
   },
+  cancelButtonWrapper: {
+    textDecoration: `none`,
+  },
   cancelButton: {
     backgroundColor: accent,
     '&:hover': {
