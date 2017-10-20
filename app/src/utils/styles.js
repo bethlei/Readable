@@ -269,4 +269,7 @@ export const styles = theme => ({
     borderBottom: `1px solid rgba(255, 255, 255, 0.6)`,
     transition: `border-color 0.1s ease-in`,
   },
+  postDetailsWrapper: {
+    paddingTop: theme.spacing.unit*3,
+  }
 });

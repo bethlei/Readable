@@ -134,13 +134,13 @@ export function flagPostAsDeleted(postId) {
   }
 }
 
-export function deletePostToServer(postId) {
+export function deletePostToServer(postId, callback) {
   return dispatch => {
     return deleteSinglePost(postId)
       .then(() => dispatch(flagPostAsDeleted(postId)))
       .then(() => getAllCategoriesPosts()
       .then(data => dispatch(deletePost(data)))
-    )
+    ).then(() => callback())
   }
 }
 

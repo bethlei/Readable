@@ -9,7 +9,7 @@ import Paper from 'material-ui/Paper'
 import { fetchAllPosts } from './../actions'
 import Category from './../components/Category'
 import { ListAllPosts, ListCategoryPosts } from './ListPosts'
-import PostDetails from './PostDetails'
+import { PostDetails } from './PostDetails'
 import EditPost from './EditPost'
 import { CreatePost } from './CreatePost'
 import NoMatch from './NoMatch'
@@ -52,9 +52,9 @@ class App extends Component {
                   <Paper className={classes.paper}><ListCategoryPosts {...props} /></Paper>
                 </Grid>
               )} />
-              <Route exact path='/post/:post?' render={() => (
+              <Route exact path='/post/:post?' render={(props) => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}><PostDetails /></Paper>
+                  <Paper className={classes.paper}><PostDetails {...props} /></Paper>
                 </Grid>
               )} />
               <Route exact path='/post/edit/:post?' render={() => (

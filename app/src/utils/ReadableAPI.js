@@ -67,7 +67,7 @@ export const updateSinglePostVote = (post, vote) =>
     body: JSON.stringify(vote)
   }).then(res => res.json())
 
-export const editSinglePost = post =>
+export const editSinglePost = (post, newPost) =>
   fetch(`${api}/posts/${post}`, {
     method: 'PUT',
     headers: {
@@ -91,7 +91,7 @@ export const getSingleComment = comment =>
     error => console.log('An error occurred', error)
   )
 
-export const editSingleComment = comment =>
+export const editSingleComment = (comment, newComment) =>
   fetch(`${api}/comments/${comment}`, {
     method: 'PUT',
     headers: {

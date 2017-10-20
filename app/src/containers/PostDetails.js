@@ -1,15 +1,50 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import Post from './../components/Post'
 import {
-  fetchAllPosts,
-
+  updatePostScoreToServer,
+  deletePostToServer,
+  editPostToServer,
+  updateCommentScoreToServer,
+  deleteCommentToServer,
+  editCommentToServer,
+  addCommentToServer,
 } from './../actions'
 
-const PostDetails = () => {
-  return (
-    <Post />
-  )
+const getPostFromParamId = (postIds, posts, comments, postId) => {
+  console.log(postIds, posts, comments, postId)
+  console.log(posts[postId])
+  console.log(posts[postId].comments)
+
+  const commentsByPost = posts[postId].comments
+  let sortedCommentsByPost
+
+  sortedCommentsByPost = commentsByPost.sort(function(a, b) {
+    return comments[b].voteScore - comments[a].voteScore
+  })
+
+  const post = { ...posts[postId], comments: sortedCommentsByPost }
+
+  return post
 }
 
-export default PostDetails
+const mapStateToProps = ({ allPosts, posts, comments }, ownProps) => ({
+  postId: ownProps.match.params.post,
+  post: getPostFromParamId(
+    allPosts,
+    posts,
+    comments,
+    ownProps.match.params.post
+  ),
+})
+
+const mapDispatchToProps = {
+  updateSinglePostVote: updatePostScoreToServer,
+  deletePost: deletePostToServer,
+  editPost: editPostToServer,
+  updateSingleCommentVote: updateCommentScoreToServer,
+  deleteComment: deleteCommentToServer,
+  editComment: editCommentToServer,
+  addComment: addCommentToServer,
+}
+
+export const PostDetails = connect(mapStateToProps, mapDispatchToProps)(Post)
