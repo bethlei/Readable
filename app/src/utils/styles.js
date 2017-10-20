@@ -31,7 +31,7 @@ export const styles = theme => ({
     lineHeight: 1,
     textDecoration: `none`,
     textAlign: `center`,
-    padding: theme.spacing.unit*3,
+    padding: theme.spacing.unit*2,
   },
   category: {
     display: `flex`,
@@ -67,7 +67,8 @@ export const styles = theme => ({
     paddingLeft: 0,
     paddingRight: 0,
     paddingTop: theme.spacing.unit*3,
-    paddingBottom: theme.spacing.unit*3,
+    paddingBottom: theme.spacing.unit,
+    textAlign: `left`,
   },
   sortBy: {
     display: `inline-block`,
