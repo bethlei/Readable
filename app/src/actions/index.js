@@ -108,19 +108,19 @@ export function addPost(data) {
   }
 }
 
-export function editPostToServer(postId, newPost) {
+export function editPostToServer(postId, newPost, callback) {
   return dispatch => {
     return editSinglePost(postId, newPost)
       .then(() => getSinglePost(postId)
-      .then(data => dispatch(editPost(data)))
-    )
+      .then(data => dispatch(editPost(postId, data)))
+    ).then(() => callback())
   }
 }
 
-export function editPost(data) {
+export function editPost(postId, data) {
   return {
     type: EDIT_POST,
-    postId: data.id,
+    postId,
     category: data.category,
     title: data.title,
     body: data.body

@@ -11,10 +11,6 @@ import {
 } from './../actions'
 
 const getPostFromParamId = (postIds, posts, comments, postId) => {
-  console.log(postIds, posts, comments, postId)
-  console.log(posts[postId])
-  console.log(posts[postId].comments)
-
   const commentsByPost = posts[postId].comments
   let sortedCommentsByPost
 

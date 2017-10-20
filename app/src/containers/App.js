@@ -10,7 +10,7 @@ import { fetchAllPosts } from './../actions'
 import Category from './../components/Category'
 import { ListAllPosts, ListCategoryPosts } from './ListPosts'
 import { PostDetails } from './PostDetails'
-import EditPost from './EditPost'
+import { EditPost } from './EditPost'
 import { CreatePost } from './CreatePost'
 import NoMatch from './NoMatch'
 
@@ -42,9 +42,9 @@ class App extends Component {
               <Category />
             </Grid>
             <Switch>
-              <Route exact path='/' render={() => (
+              <Route exact path='/' render={(props) => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}><ListAllPosts /></Paper>
+                  <Paper className={classes.paper}><ListAllPosts {...props} /></Paper>
                 </Grid>
               )} />
               <Route exact path='/category/:category?' render={(props) => (
@@ -57,9 +57,9 @@ class App extends Component {
                   <Paper className={classes.paper}><PostDetails {...props} /></Paper>
                 </Grid>
               )} />
-              <Route exact path='/post/edit/:post?' render={() => (
+              <Route exact path='/post/edit/:post?' render={(props) => (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}><EditPost /></Paper>
+                  <Paper className={classes.paper}><EditPost {...props} /></Paper>
                 </Grid>
               )} />
               <Route exact path='/addpost' render={(props) => (

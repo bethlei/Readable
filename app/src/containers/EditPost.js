@@ -1,15 +1,16 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import EditPostForm from './../components/EditPostForm'
 import {
-  fetchAllPosts,
-
+  editPostToServer,
 } from './../actions'
 
-const EditPost = () => {
-  return (
-    <EditPostForm />
-  )
+const mapStateToProps = ({ allPosts, posts }, ownProps) => ({
+  postId: ownProps.match.params.post,
+  post: posts[ownProps.match.params.post]
+})
+
+const mapDispatchToProps = {
+  editPost: editPostToServer
 }
 
-export default EditPost
+export const EditPost = connect(mapStateToProps, mapDispatchToProps)(EditPostForm)

@@ -74,7 +74,7 @@ export const editSinglePost = (post, newPost) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(post)
+    body: JSON.stringify(newPost)
   }).then(res => res.json())
 
 export const getAllCommentsByPost = post =>
@@ -98,7 +98,7 @@ export const editSingleComment = (comment, newComment) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(comment)
+    body: JSON.stringify(newComment)
   }).then(res => res.json())
 
 export const addSingleComment = obj =>

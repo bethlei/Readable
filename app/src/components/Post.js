@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -11,7 +10,6 @@ import IconButton from 'material-ui/IconButton'
 import ThumbUpIcon from 'material-ui-icons/ThumbUp'
 import ThumbDownIcon from 'material-ui-icons/ThumbDown'
 import Button from 'material-ui/Button'
-import AddIcon from 'material-ui-icons/Add'
 import ModeEditIcon from 'material-ui-icons/ModeEdit'
 import DeleteIcon from 'material-ui-icons/Delete'
 import PersonIcon from 'material-ui-icons/Person'
@@ -34,7 +32,6 @@ class Post extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { classes, postId, post } = this.props
 
     return (

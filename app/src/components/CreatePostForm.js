@@ -97,7 +97,7 @@ class CreatePostForm extends Component {
 
         <Field
           name='body'
-          label='Enter Post'
+          label='Post'
           component={this.renderTextField}
           type='text'
           className={classes.textField}
