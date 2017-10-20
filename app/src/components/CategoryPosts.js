@@ -30,7 +30,9 @@ class CategoryPosts extends Component {
   }
 
   deleteSinglePost = postId => {
-    this.props.deletePost(postId)
+    this.props.deletePost(postId, () => {
+      this.props.history.push("/")
+    })
   }
 
   render() {
