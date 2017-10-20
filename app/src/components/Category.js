@@ -11,16 +11,19 @@ const Category = (props) => {
 
   return (
     <div className={classes.category}>
-      <Button color="contrast" dense classes={{
-        root: classes.button,
-        label: classes.catLabel,
-      }}>{props.children ? props.children : <Link className={classes.catLink} to='/'>All Posts</Link>}</Button>
-
-      {categories.map(category => (
+      <Link className={classes.catLink} to='/'>
         <Button color="contrast" dense classes={{
           root: classes.button,
           label: classes.catLabel,
-        }} key={category}>{props.children ? props.children : <Link className={classes.catLink} to={'/category/' + category}>{category}</Link>}</Button>
+        }}>{props.children ? props.children : `All Posts`}</Button>
+      </Link>
+      {categories.map(category => (
+      <Link className={classes.catLink} to={'/category/' + category} key={category}>
+        <Button color="contrast" dense classes={{
+          root: classes.button,
+          label: classes.catLabel,
+        }}>{props.children ? props.children : category}</Button>
+      </Link>
       ))}
     </div>
   )

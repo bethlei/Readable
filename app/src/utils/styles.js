@@ -42,14 +42,10 @@ export const styles = theme => ({
   button: {
     margin: `11px`,
     fontSize: `1rem`,
-    color: `rgba(255, 255, 255, 0.7)`,
     whiteSpace: `nowrap`,
   },
   catLabel: {
     textTransform: `uppercase`,
-  },
-  catLink: {
-    textDecoration: `none`,
     color: `rgba(255, 255, 255, 0.5)`,
     '&:active': {
       color: `rgba(255, 255, 255, 0.82)`,
@@ -57,6 +53,9 @@ export const styles = theme => ({
     '&:focus': {
       color: `rgba(255, 255, 255, 0.96)`,
     },
+  },
+  catLink: {
+    textDecoration: `none`,
   },
   mainContentWrapper: {
     minHeight: `calc(100vh - 188px)`,
