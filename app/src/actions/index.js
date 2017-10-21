@@ -202,7 +202,7 @@ export function addComment(data) {
   return {
     type: ADD_COMMENT,
     parentId: data.parentId,
-    commentId: data.commentId,
+    commentId: data.id,
     comment: data
   }
 }
@@ -220,7 +220,7 @@ export function editCommentToServer(commentId, newComment) {
 export function editComment(data) {
   return {
     type: EDIT_COMMENT,
-    commentId: data.commentId,
+    commentId: data.id,
     timestamp: data.timestamp,
     body: data.body
   }
@@ -228,7 +228,7 @@ export function editComment(data) {
 
 export function updateCommentScoreToServer(commentId, vote) {
   return dispatch => {
-    return updateSingleCommentVote(commentId, vote)
+    return updateSingleCommentVote(commentId,  { option: vote })
       .then(() => getSingleComment(commentId)
       .then(data => dispatch(updateCommentScore(data)))
     )
@@ -238,7 +238,7 @@ export function updateCommentScoreToServer(commentId, vote) {
 export function updateCommentScore(data) {
   return {
     type: UPDATE_COMMENT_SCORE,
-    commentId: data.commentId,
+    commentId: data.id,
     commentScore: data.voteScore
   }
 }
