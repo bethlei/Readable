@@ -271,5 +271,69 @@ export const styles = theme => ({
   },
   postDetailsWrapper: {
     paddingTop: theme.spacing.unit*3,
-  }
-});
+  },
+  commentsWrapper: {
+    display: `block`,
+  },
+  commentHeader: {
+    fontWeight: 300,
+    fontSize: `28px`,
+    color: `rgba(0,0,0,0.54)`,
+    alignSelf: `flex-start`,
+    paddingTop: theme.spacing.unit*3,
+    paddingBottom: theme.spacing.unit,
+    width: `100%`,
+    display: `flex`,
+  },
+  commentIcon: {
+    paddingTop: `5px`,
+    paddingLeft: `16px`,
+    paddingRight: `5px`,
+  },
+  commentIconText: {
+    fontSize: `1.1rem`,
+    paddingTop: `7px`,
+  },
+  voteScoreComment: {
+    color: secondary,
+  },
+  deleteCommentIcon: {
+    backgroundColor: secondary,
+    '&:hover': {
+      backgroundColor: secondaryHover,
+    },
+    width: `40px`,
+    height: `40px`,
+    marginLeft: `24px`,
+  },
+  editCommentIcon: {
+    backgroundColor: secondary,
+    '&:hover': {
+      backgroundColor: secondaryHover,
+    },
+    width: `40px`,
+    height: `40px`,
+    marginLeft: `16px`,
+  },
+  cardCommentControls: {
+    paddingLeft: `20px`,
+    paddingRight: theme.spacing.unit*3,
+    paddingTop: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    textAlign: `left`,
+    backgroundColor: `#efefef`,
+    display: `inline-flex`,
+    flexDirection: `row`,
+    alignItems: `center`,
+    justifyContent: `flex-start`,
+  },
+  addCommentIcon: {
+    backgroundColor: accent,
+    '&:hover': {
+      backgroundColor: accentHover,
+    },
+    position: `fixed`,
+    bottom: `40px`,
+    right: `40px`,
+  },
+})

@@ -228,7 +228,7 @@ export function editComment(data) {
 
 export function updateCommentScoreToServer(commentId, vote) {
   return dispatch => {
-    return updateSingleCommentVote(commentId,  { option: vote })
+    return updateSingleCommentVote(commentId, { option: vote })
       .then(() => getSingleComment(commentId)
       .then(data => dispatch(updateCommentScore(data)))
     )

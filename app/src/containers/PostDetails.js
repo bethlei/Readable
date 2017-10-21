@@ -31,6 +31,7 @@ const mapStateToProps = ({ allPosts, posts, comments }, ownProps) => ({
     comments,
     ownProps.match.params.post
   ),
+  comments,
 })
 
 const mapDispatchToProps = {
