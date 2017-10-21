@@ -63,7 +63,7 @@ class EditPostForm extends Component {
     const classes = this.props.classes
     const categories = ['react', 'redux', 'udacity']
     const { handleSubmit } = this.props
-    postId = this.props.post.id
+    postId = this.props.match.params.post
 
     return (
       <div className={classes.mainContentWrapper}>
@@ -138,6 +138,7 @@ EditPostForm = withStyles(styles)(reduxForm({
   form: 'EditPostForm',
   asyncValidate,
   validate,
+  enableReinitialize: true,
 })(EditPostForm))
 
 EditPostForm = connect(state => ({
