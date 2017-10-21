@@ -54,7 +54,7 @@ class CategoryPosts extends Component {
             <Link to ={ '/post/' + posts[postId].id } className={classes.postTitle}>{ posts[postId].title }</Link>
             <div className={classes.postInfo}><PersonIcon /><span className={classes.postInfoText}>{ posts[postId].author }</span></div>
             <div className={classes.postInfo}><DateRangeIcon /><span className={classes.postInfoText}>{ moment(posts[postId].timestamp).format('MMMM Do YYYY, h:mm:ss a') }</span></div>
-            <div className={classes.postInfo}><CommentIcon /><span className={classes.postInfoText}>{ posts[postId].comments.length } comments</span></div>
+            <div className={classes.postInfo}><CommentIcon /><span className={classes.postInfoText}>{ posts[postId].comments.length } { posts[postId].comments.length >= 1 ? `comments` : `comment` }</span></div>
             <div className={classes.postBody}>{ posts[postId].body }</div>
           </CardContent>
           <div className={classes.cardControls}>
