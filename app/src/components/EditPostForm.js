@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -12,6 +13,8 @@ import Input, { InputLabel } from 'material-ui/Input'
 import { FormControl, FormHelperText } from 'material-ui/Form'
 import Button from 'material-ui/Button'
 import asyncValidate from './../utils/asyncValidate'
+
+let postId
 
 class EditPostForm extends Component {
   state = {
@@ -50,10 +53,7 @@ class EditPostForm extends Component {
   )
 
   onSubmit(values) {
-    console.log(values)
-    console.log(this.props)
     const postId = this.props.match.params.post
-    console.log(postId)
     this.props.editPost(postId, values, () => {
       this.props.history.push("/")
     })
@@ -63,6 +63,7 @@ class EditPostForm extends Component {
     const classes = this.props.classes
     const categories = ['react', 'redux', 'udacity']
     const { handleSubmit } = this.props
+    postId = this.props.post.id
 
     return (
       <div className={classes.mainContentWrapper}>
@@ -133,8 +134,14 @@ EditPostForm.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(reduxForm({
+EditPostForm = withStyles(styles)(reduxForm({
   form: 'EditPostForm',
   asyncValidate,
   validate,
 })(EditPostForm))
+
+EditPostForm = connect(state => ({
+    initialValues: state.posts[postId]
+}))(EditPostForm)
+
+export default EditPostForm
