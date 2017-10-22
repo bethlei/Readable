@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -16,40 +17,24 @@ import DeleteIcon from 'material-ui-icons/Delete'
 import PersonIcon from 'material-ui-icons/Person'
 import DateRangeIcon from 'material-ui-icons/DateRange'
 import CommentIcon from 'material-ui-icons/Comment'
+import Dialog from 'material-ui/Dialog'
+import Paper from 'material-ui/Paper'
+import CreateCommentForm from './../components/CreateCommentForm'
+import { editCommentToServer, addCommentToServer, } from './../actions'
+
 
 class Post extends Component {
   state = {
-    showAddCommentModal: false,
-    showEditCommentModal: false,
+    open: false,
   };
 
-  OpenAddCommentModal = ({ commentId }) => {
-    this.setState(() => ({
-      showAddCommentModal: true,
-      showEditCommentModal: false,
-    }))
-  }
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
 
-  CloseAddCommentModal = () => {
-    this.setState(() => ({
-      showAddCommentModal: false,
-      showEditCommentModal: false,
-    }))
-  }
-
-  OpenEditCommentModal = ({ commentId }) => {
-    this.setState(() => ({
-      showAddCommentModal: false,
-      showEditCommentModal: true,
-    }))
-  }
-
-  CloseEditCommentModal = () => {
-    this.setState(() => ({
-      showAddCommentModal: false,
-      showEditCommentModal: false,
-    }))
-  }
+  handleRequestClose = () => {
+    this.setState({ open: false });
+  };
 
   upVotePost = postId => {
     this.props.updateSinglePostVote(postId, 'upVote')
@@ -94,7 +79,6 @@ class Post extends Component {
   render() {
     const { classes, postId, post, comments } = this.props
     const commentIdsFromPost = post.comments
-    console.log(this.props)
 
     return (
       <div className={classes.mainContentWrapper}>
@@ -134,7 +118,7 @@ class Post extends Component {
           </div>
         </Card>
       </div>
-      
+
       <div className={classes.commentHeader}>Join the discussion<CommentIcon className={classes.commentIcon} /><span className={classes.commentIconText}>{ post.comments.length } { post.comments.length > 1 ? `comments` : `comment` }</span></div>
 
       <div className={classes.commentsWrapper}>
@@ -171,9 +155,13 @@ class Post extends Component {
         </Card>
         ))}
       </div>
-      <Button fab color="primary" aria-label="Add comment" className={classes.addCommentIcon}>
+
+      <Button onClick={this.handleClickOpen} fab color="primary" aria-label="Add comment" className={classes.addCommentIcon}>
         <AddIcon />
       </Button>
+      <Dialog open={this.state.open} onRequestClose={this.handleRequestClose} fullWidth maxWidth="md">
+        <Paper className={classes.paper}><CreateCommentForm /></Paper>
+      </Dialog>
       </Grid>
       </div>
     )
@@ -184,4 +172,9 @@ Post.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(Post)
+const mapDispatchToProps = {
+  editComment: editCommentToServer,
+  addComment: addCommentToServer,
+}
+
+export default withStyles(styles)(connect(null, mapDispatchToProps)(Post))
