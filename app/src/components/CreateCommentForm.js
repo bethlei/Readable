@@ -22,8 +22,6 @@ class CreateCommentForm extends Component {
   }
 
   onSubmit(values) {
-    console.log(values)
-    console.log(this.props)
     const postId = this.props.postId
     this.props.addComment({
       parentId: postId,

@@ -25,9 +25,6 @@ class EditCommentForm extends Component {
   }
 
   onSubmit(values) {
-    console.log(values)
-    console.log(this.props)
-    const postId = this.props.postId
     const commentId = this.props.commentId
     this.props.editComment(commentId, values, () => {
       this.props.onRequestClose()
