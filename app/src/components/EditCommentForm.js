@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -8,6 +9,8 @@ import Grid from 'material-ui/Grid'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import asyncValidate from './../utils/asyncValidate'
+
+let commentId
 
 class EditCommentForm extends Component {
   renderTextField({ input, label, meta: { touched, error }, ...custom }) {
@@ -34,6 +37,7 @@ class EditCommentForm extends Component {
   render() {
     const classes = this.props.classes
     const { handleSubmit } = this.props
+    commentId = this.props.commentId
 
     return (
       <div className={classes.mainContentWrapper}>
@@ -92,8 +96,15 @@ EditCommentForm.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(reduxForm({
+EditCommentForm = withStyles(styles)(reduxForm({
   form: 'EditCommentForm',
   asyncValidate,
   validate,
+  enableReinitialize: true,
 })(EditCommentForm))
+
+EditCommentForm = connect(state => ({
+    initialValues: state.comments[commentId]
+}))(EditCommentForm)
+
+export default EditCommentForm
