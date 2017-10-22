@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -18,6 +19,7 @@ import DateRangeIcon from 'material-ui-icons/DateRange'
 import CommentIcon from 'material-ui-icons/Comment'
 import Dialog from 'material-ui/Dialog'
 import Paper from 'material-ui/Paper'
+import Tooltip from 'material-ui/Tooltip'
 import CreateCommentForm from './../components/CreateCommentForm'
 import EditCommentForm from './../components/EditCommentForm'
 
@@ -96,28 +98,36 @@ class Post extends Component {
             <div className={classes.postBody}>{ post.body }</div>
           </CardContent>
           <div className={classes.cardControls}>
+            <Tooltip id="upvote-post" title="Upvote Post" placement="top">
             <IconButton
-              aria-label="Thumb Up"
+              aria-label="Upvote Post"
               className={classes.iconButton}
               value={postId}
               onClick={() => this.upVotePost(postId)}>
               <ThumbUpIcon />
             </IconButton>
+            </Tooltip>
             <div className={classes.voteScore}>{ post.voteScore }</div>
+            <Tooltip id="downvote-post" title="Downvote Post" placement="top">
             <IconButton
-              aria-label="Thumb Down"
+              aria-label="Downvote Post"
               className={classes.iconButton}
               value={postId}
               onClick={() => this.downVotePost(postId)}>
               <ThumbDownIcon />
             </IconButton>
-            <Button onClick={() => this.deleteSinglePost(postId)} fab color="primary" aria-label="delete" className={classes.deletePostIcon}>
+            </Tooltip>
+            <Tooltip id="delete-post" title="Delete Post" placement="top">
+            <Button onClick={() => this.deleteSinglePost(postId)} fab color="primary" aria-label="Delete Post" className={classes.deletePostIcon}>
               <DeleteIcon />
             </Button>
+            </Tooltip>
             <Link to ={ '/post/edit/' + post.id }>
-              <Button fab color="primary" aria-label="edit" className={classes.editPostIcon}>
+              <Tooltip id="edit-post" title="Edit Post" placement="top">
+              <Button fab color="primary" aria-label="Edit Post" className={classes.editPostIcon}>
                 <ModeEditIcon />
               </Button>
+              </Tooltip>
             </Link>
           </div>
         </Card>
@@ -134,35 +144,45 @@ class Post extends Component {
             <div className={classes.postBody}>{ comments[comment].body }</div>
           </CardContent>
           <div className={classes.cardCommentControls}>
+            <Tooltip id="upvote-comment" title="Upvote Comment" placement="top">
             <IconButton
-              aria-label="Thumb Up"
+              aria-label="Upvote Comment"
               className={classes.iconButton}
               value={postId}
               onClick={() => this.upVoteComment(comment)}>
               <ThumbUpIcon />
             </IconButton>
+            </Tooltip>
             <div className={classes.voteScoreComment}>{ comments[comment].voteScore }</div>
+            <Tooltip id="downvote-comment" title="Downvote Comment" placement="top">
             <IconButton
-              aria-label="Thumb Down"
+              aria-label="Downvote Comment"
               className={classes.iconButton}
               value={postId}
               onClick={() => this.downVoteComment(comment)}>
               <ThumbDownIcon />
             </IconButton>
-            <Button onClick={() => this.deleteSingleComment(comment)} fab color="primary" aria-label="delete" className={classes.deleteCommentIcon}>
+            </Tooltip>
+            <Tooltip id="delete-comment" title="Delete Comment" placement="top">
+            <Button onClick={() => this.deleteSingleComment(comment)} fab color="primary" aria-label="Delete Comment" className={classes.deleteCommentIcon}>
               <DeleteIcon />
             </Button>
-            <Button onClick={this.handleClickOpenEditComment} data-key={comment} fab color="primary" aria-label="edit" className={classes.editCommentIcon}>
+            </Tooltip>
+            <Tooltip id="edit-comment" title="Edit Comment" placement="top">
+            <Button onClick={this.handleClickOpenEditComment} data-key={comment} fab color="primary" aria-label="Edit Comment" className={classes.editCommentIcon}>
               <ModeEditIcon />
             </Button>
+            </Tooltip>
           </div>
         </Card>
         ))}
       </div>
 
+      <Tooltip id="add-comment" title="Add comment" placement="top">
       <Button onClick={this.handleClickOpenAddComment} fab color="primary" aria-label="Add comment" className={classes.addCommentIcon}>
         <AddIcon />
       </Button>
+      </Tooltip>
       <Dialog open={this.state.openAddComment} onRequestClose={this.handleRequestCloseAddComment} fullWidth maxWidth="md">
         <Paper className={classes.paper}>
           <CreateCommentForm

@@ -17,6 +17,7 @@ import DeleteIcon from 'material-ui-icons/Delete'
 import PersonIcon from 'material-ui-icons/Person'
 import DateRangeIcon from 'material-ui-icons/DateRange'
 import CommentIcon from 'material-ui-icons/Comment'
+import Tooltip from 'material-ui/Tooltip'
 import SortMenu from './SortMenu';
 import { changeSortOrder } from './../actions'
 
@@ -55,37 +56,47 @@ class AllPosts extends Component {
             <div className={classes.postBody}>{ posts[postId].body }</div>
           </CardContent>
           <div className={classes.cardControls}>
+            <Tooltip id="upvote-post" title="Upvote Post" placement="top">
             <IconButton
-              aria-label="Thumb Up"
+              aria-label="Upvote Post"
               className={classes.iconButton}
               value={postId}
               onClick={() => this.upVote(postId)}>
               <ThumbUpIcon />
             </IconButton>
+            </Tooltip>
             <div className={classes.voteScore}>{ posts[postId].voteScore }</div>
+            <Tooltip id="downvote-post" title="Downvote Post" placement="top">
             <IconButton
-              aria-label="Thumb Down"
+              aria-label="Downvote Post"
               className={classes.iconButton}
               value={postId}
               onClick={() => this.downVote(postId)}>
               <ThumbDownIcon />
             </IconButton>
-            <Button onClick={() => this.deleteSinglePost(postId)} fab color="primary" aria-label="delete" className={classes.deletePostIcon}>
+            </Tooltip>
+            <Tooltip id="delete-post" title="Delete Post" placement="top">
+            <Button onClick={() => this.deleteSinglePost(postId)} fab color="primary" aria-label="Delete Post" className={classes.deletePostIcon}>
               <DeleteIcon />
             </Button>
+            </Tooltip>
             <Link to ={ '/post/edit/' + posts[postId].id }>
-              <Button fab color="primary" aria-label="edit" className={classes.editPostIcon}>
+              <Tooltip id="edit-post" title="Edit Post" placement="top">
+              <Button fab color="primary" aria-label="Edit Post" className={classes.editPostIcon}>
                 <ModeEditIcon />
               </Button>
+              </Tooltip>
             </Link>
           </div>
         </Card>
         ))}
         </div>
         <Link to ='/addpost'>
-          <Button fab color="primary" aria-label="add" className={classes.addPostIcon}>
+          <Tooltip id="add-post" title="Add Post" placement="top">
+          <Button fab color="primary" aria-label="Add Post" className={classes.addPostIcon}>
             <AddIcon />
           </Button>
+          </Tooltip>
         </Link>
         </Grid>
       </div>
