@@ -187,14 +187,14 @@ export function getCommentsByPost(data, parentId) {
   }
 }
 
-export function addCommentToServer(comment) {
+export function addCommentToServer(comment, callback) {
   return dispatch => {
     const id = generateId()
     const timestamp = (moment().unix()) * 1000
     return addSingleComment({ ...comment, id, timestamp })
       .then(() => getSingleComment(id)
       .then(data => dispatch(addComment(data)))
-    )
+    ).then(() => callback())
   }
 }
 

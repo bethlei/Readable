@@ -51,7 +51,7 @@ class CreatePostForm extends Component {
 
   onSubmit(values) {
     this.props.setPost(values, () => {
-      this.props.history.push("/");
+      this.props.history.push("/")
     });
   }
 

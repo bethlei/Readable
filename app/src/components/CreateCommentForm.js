@@ -6,10 +6,6 @@ import { withStyles } from 'material-ui/styles'
 import { styles } from './../utils/styles'
 import Grid from 'material-ui/Grid'
 import TextField from 'material-ui/TextField'
-import Select from 'material-ui/Select'
-import MenuItem from 'material-ui/Menu/MenuItem'
-import Input, { InputLabel } from 'material-ui/Input'
-import { FormControl, FormHelperText } from 'material-ui/Form'
 import Button from 'material-ui/Button'
 import asyncValidate from './../utils/asyncValidate'
 
@@ -27,7 +23,15 @@ class CreateCommentForm extends Component {
 
   onSubmit(values) {
     console.log(values)
-    this.props.addComment(values)
+    console.log(this.props)
+    const postId = this.props.postId
+    this.props.addComment({
+      parentId: postId,
+      author: values.author,
+      body: values.body,
+    }, () => {
+      this.props.onRequestClose()
+    })
   }
 
   render() {

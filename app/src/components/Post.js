@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -20,20 +19,19 @@ import CommentIcon from 'material-ui-icons/Comment'
 import Dialog from 'material-ui/Dialog'
 import Paper from 'material-ui/Paper'
 import CreateCommentForm from './../components/CreateCommentForm'
-import { editCommentToServer, addCommentToServer, } from './../actions'
 
 
 class Post extends Component {
   state = {
-    open: false,
+    openAddComment: false,
   };
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  handleClickOpenAddComment = () => {
+    this.setState({ openAddComment: true });
   };
 
-  handleRequestClose = () => {
-    this.setState({ open: false });
+  handleRequestCloseAddComment = () => {
+    this.setState({ openAddComment: false });
   };
 
   upVotePost = postId => {
@@ -58,26 +56,13 @@ class Post extends Component {
     this.props.updateSingleCommentVote(commentId, 'downVote')
   }
 
-  addSingleComment = postId => {
-    this.OpenAddCommentModal({ postId })
-  }
-
-  editSingleComment = commentId => {
-    this.OpenEditCommentModal({ commentId })
-  }
-
   deleteSingleComment = commentId => {
     const postId = this.props.postId
     this.props.deleteComment(commentId, postId)
   }
 
-  submitComment = values => {
-    const postId = this.props.postId
-    this.props.addComment(postId, values)
-  }
-
   render() {
-    const { classes, postId, post, comments } = this.props
+    const { classes, postId, post, comments, posts } = this.props
     const commentIdsFromPost = post.comments
 
     return (
@@ -156,11 +141,18 @@ class Post extends Component {
         ))}
       </div>
 
-      <Button onClick={this.handleClickOpen} fab color="primary" aria-label="Add comment" className={classes.addCommentIcon}>
+      <Button onClick={this.handleClickOpenAddComment} fab color="primary" aria-label="Add comment" className={classes.addCommentIcon}>
         <AddIcon />
       </Button>
-      <Dialog open={this.state.open} onRequestClose={this.handleRequestClose} fullWidth maxWidth="md">
-        <Paper className={classes.paper}><CreateCommentForm /></Paper>
+      <Dialog open={this.state.openAddComment} onRequestClose={this.handleRequestCloseAddComment} fullWidth maxWidth="md">
+        <Paper className={classes.paper}>
+          <CreateCommentForm
+            addComment={this.props.addComment}
+            onRequestClose={this.handleRequestCloseAddComment}
+            postId={postId}
+            comments={comments}
+            posts={posts} />
+        </Paper>
       </Dialog>
       </Grid>
       </div>
@@ -172,9 +164,4 @@ Post.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-const mapDispatchToProps = {
-  editComment: editCommentToServer,
-  addComment: addCommentToServer,
-}
-
-export default withStyles(styles)(connect(null, mapDispatchToProps)(Post))
+export default withStyles(styles)(Post)

@@ -338,9 +338,4 @@ export const styles = theme => ({
     bottom: theme.spacing.unit*5,
     right: theme.spacing.unit*5,
   },
-  addCommentDialog: {
-    backgroundColor: `green`,
-    width: `80vw`,
-    height: `80vh`,
-  },
 })
