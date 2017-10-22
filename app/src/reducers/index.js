@@ -153,6 +153,7 @@ function comments(state = initialState.comments, action) {
         [commentId]: {
           ...state[commentId],
           timestamp: action.timestamp,
+          author: action.author,
           body: action.body
         }
       }
@@ -202,12 +203,12 @@ function postsByCategory(state = initialState.postsByCategory, action) {
           posts: []
         }
       })
-      return categoriesState;
+      return categoriesState
 
     case GET_ALL_POSTS:
       const posts = action.posts
       const postsIds = action.allPosts
-      let categoriesArr = [];
+      let categoriesArr = []
 
       for (const category in state) {
         categoriesArr.push(category)

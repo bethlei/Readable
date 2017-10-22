@@ -19,20 +19,39 @@ import CommentIcon from 'material-ui-icons/Comment'
 import Dialog from 'material-ui/Dialog'
 import Paper from 'material-ui/Paper'
 import CreateCommentForm from './../components/CreateCommentForm'
-
+import EditCommentForm from './../components/EditCommentForm'
 
 class Post extends Component {
   state = {
     openAddComment: false,
+    openEditComment: false,
+    commentId: ``,
   };
 
   handleClickOpenAddComment = () => {
-    this.setState({ openAddComment: true });
+    this.setState({
+      openAddComment: true,
+    });
   };
 
   handleRequestCloseAddComment = () => {
-    this.setState({ openAddComment: false });
+    this.setState({
+      openAddComment: false,
+    });
   };
+
+  handleClickOpenEditComment = (event) => {
+    this.setState({
+      openEditComment: true,
+      commentId: event.currentTarget.getAttribute('data-key'),
+    });
+  }
+
+  handleRequestCloseEditComment = () => {
+    this.setState({
+      openEditComment: false,
+    });
+  }
 
   upVotePost = postId => {
     this.props.updateSinglePostVote(postId, 'upVote')
@@ -71,7 +90,7 @@ class Post extends Component {
       <div className={classes.postDetailsWrapper}>
         <Card className={classes.cardPost}>
           <CardContent className={classes.cardContent}>
-            <div className={classes.postTitle}>{ post.title }</div>
+            <div className={classes.postTitleAlt}>{ post.title }</div>
             <div className={classes.postInfo}><PersonIcon /><span className={classes.postInfoText}>{ post.author }</span></div>
             <div className={classes.postInfo}><DateRangeIcon /><span className={classes.postInfoText}>{ moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a') }</span></div>
             <div className={classes.postBody}>{ post.body }</div>
@@ -133,7 +152,7 @@ class Post extends Component {
             <Button onClick={() => this.deleteSingleComment(comment)} fab color="primary" aria-label="delete" className={classes.deleteCommentIcon}>
               <DeleteIcon />
             </Button>
-            <Button fab color="primary" aria-label="edit" className={classes.editCommentIcon}>
+            <Button onClick={this.handleClickOpenEditComment} data-key={comment} fab color="primary" aria-label="edit" className={classes.editCommentIcon}>
               <ModeEditIcon />
             </Button>
           </div>
@@ -152,6 +171,17 @@ class Post extends Component {
             postId={postId}
             comments={comments}
             posts={posts} />
+        </Paper>
+      </Dialog>
+
+      <Dialog open={this.state.openEditComment} onRequestClose={this.handleRequestCloseEditComment} fullWidth maxWidth="md">
+        <Paper className={classes.paper}>
+          <EditCommentForm
+            editComment={this.props.editComment}
+            onRequestClose={this.handleRequestCloseEditComment}
+            postId={postId}
+            commentId={this.state.commentId}
+            comments={comments} />
         </Paper>
       </Dialog>
       </Grid>

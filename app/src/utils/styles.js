@@ -209,6 +209,7 @@ export const styles = theme => ({
   },
   buttonGroup: {
     flexDirection: `row`,
+    marginTop: theme.spacing.unit*3,
   },
   submitButton: {
     marginLeft: theme.spacing.unit*2,
@@ -248,7 +249,7 @@ export const styles = theme => ({
     color: theme.palette.common.fullWhite,
   },
   error404: {
-    fontSize: `220px`,
+    fontSize: `13.75rem`,
     fontWeight: 300,
     top: `15vh`,
     margin: 0,
@@ -258,7 +259,7 @@ export const styles = theme => ({
     bottom: `-10vh`,
     position: `relative`,
     color: `rgba(255, 255, 255, 0.6)`,
-    fontSize: `20px`,
+    fontSize: `1.25rem`,
     fontWeight: 300,
     letterSpacing: `-0.04em`,
     margin: 0,
@@ -273,12 +274,19 @@ export const styles = theme => ({
   postDetailsWrapper: {
     paddingTop: theme.spacing.unit*3,
   },
+  postTitleAlt: {
+    fontSize: `1.5rem`,
+    fontWeight: `300`,
+    color: `rgba(0, 0, 0, 0.75)`,
+    textDecoration: `none`,
+    display: `block`,
+  },
   commentsWrapper: {
     display: `block`,
   },
   commentHeader: {
     fontWeight: 300,
-    fontSize: `28px`,
+    fontSize: `1.875rem`,
     color: `rgba(0,0,0,0.54)`,
     alignSelf: `flex-start`,
     paddingTop: theme.spacing.unit*4,
@@ -288,13 +296,13 @@ export const styles = theme => ({
     borderBottom: `1px solid #e6e6e6`,
   },
   commentIcon: {
-    paddingTop: theme.spacing.unit*0.625,
+    paddingTop: theme.spacing.unit,
     paddingLeft: theme.spacing.unit*2,
     paddingRight: theme.spacing.unit*0.625,
   },
   commentIconText: {
     fontSize: `1.1rem`,
-    paddingTop: theme.spacing.unit*0.875,
+    paddingTop: theme.spacing.unit*1.125,
   },
   voteScoreComment: {
     color: secondary,

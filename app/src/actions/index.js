@@ -67,10 +67,10 @@ export function getCategories(data) {
 }
 
 export function getAllPosts(data) {
-  let dataObj = {};
+  let dataObj = {}
   for (let i = 0; i < data.length; i++) {
-    dataObj[data[i].id] = data[i];
-    dataObj[data[i].id].comments = [];
+    dataObj[data[i].id] = data[i]
+    dataObj[data[i].id].comments = []
   }
 
   return {
@@ -173,11 +173,11 @@ export function updatePostScore(data) {
 }
 
 export function getCommentsByPost(data, parentId) {
-  let dataObj = {};
+  let dataObj = {}
   for (let i = 0; i < data.length; i++) {
-    dataObj[data[i].id] = data[i];
+    dataObj[data[i].id] = data[i]
   }
-  let commentArr = data.map(comment => comment.id);
+  let commentArr = data.map(comment => comment.id)
 
   return {
     type: GET_COMMENTS_BY_POST,
@@ -207,13 +207,13 @@ export function addComment(data) {
   }
 }
 
-export function editCommentToServer(commentId, newComment) {
+export function editCommentToServer(commentId, newComment, callback) {
   return dispatch => {
     const timestamp = (moment().unix()) * 1000
     return editSingleComment(commentId, { ...newComment, timestamp })
       .then(() => getSingleComment(commentId)
       .then(data => dispatch(editComment(data)))
-    )
+    ).then(() => callback())
   }
 }
 
@@ -222,6 +222,7 @@ export function editComment(data) {
     type: EDIT_COMMENT,
     commentId: data.id,
     timestamp: data.timestamp,
+    author: data.author,
     body: data.body
   }
 }
