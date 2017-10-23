@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton'
 import Menu, { MenuItem } from 'material-ui/Menu'
 import MoreVertIcon from 'material-ui-icons/MoreVert'
+import Tooltip from 'material-ui/Tooltip'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import { styles } from './../utils/styles'
@@ -40,8 +41,9 @@ class SortMenu extends Component {
 
     return (
       <div className={classes.sortWrapper}>
+        <Tooltip id="sort-post" title="Sort Post" placement="top">
         <IconButton
-          aria-label="More"
+          aria-label="Sort Post"
           aria-owns={this.state.open ? 'sort-menu' : null}
           aria-haspopup="true"
           className={classes.iconButton}
@@ -49,6 +51,7 @@ class SortMenu extends Component {
         >
           <MoreVertIcon />
         </IconButton>
+        </Tooltip>
         <div className={classes.sortBy}>Sort by
           <span className={classes.sortType}> {sortTypes[this.state.selectedIndex].replace(/[^a-z0-9]/gmi, " ").replace(/\s+/g, " ")}</span>
         </div>
