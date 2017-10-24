@@ -242,7 +242,7 @@ export const styles = theme => ({
   },
   errorContainer: {
     backgroundColor: primary,
-    height: `calc(100vh - 188px)`,
+    height: `calc(100vh - 162px)`,
     width: `100vw`,
     opacity: 0.9,
     textAlign: `center`,

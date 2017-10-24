@@ -19,8 +19,9 @@ import CommentIcon from 'material-ui-icons/Comment'
 import Dialog from 'material-ui/Dialog'
 import Paper from 'material-ui/Paper'
 import Tooltip from 'material-ui/Tooltip'
-import CreateCommentForm from './../components/CreateCommentForm'
-import EditCommentForm from './../components/EditCommentForm'
+import CreateCommentForm from './CreateCommentForm'
+import EditCommentForm from './EditCommentForm'
+import NoMatch from './../containers/NoMatch'
 
 class Post extends Component {
   state = {
@@ -82,7 +83,15 @@ class Post extends Component {
   }
 
   render() {
-    const { classes, postId, post, comments, posts } = this.props
+    const post = this.props.post
+    
+    if (Object.keys(post).length === 0) {
+      return (
+        <div><NoMatch /></div>
+      )
+    }
+
+    const { classes, postId, comments, posts } = this.props
     const commentIdsFromPost = post.comments
 
     return (

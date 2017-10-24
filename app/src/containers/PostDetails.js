@@ -11,6 +11,10 @@ import {
 } from './../actions'
 
 const getPostFromParamId = (postIds, posts, comments, postId) => {
+  if (postIds.indexOf(postId) === -1) {
+    return {}
+  }
+
   const commentsByPost = posts[postId].comments
   let sortedCommentsByPost
 
