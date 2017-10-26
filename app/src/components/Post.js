@@ -32,26 +32,26 @@ class Post extends Component {
 
   handleClickOpenAddComment = () => {
     this.setState({
-      openAddComment: true,
+      openAddComment: !this.state.openAddComment,
     });
   };
 
   handleRequestCloseAddComment = () => {
     this.setState({
-      openAddComment: false,
+      openAddComment: !this.state.openAddComment,
     });
   };
 
   handleClickOpenEditComment = (event) => {
     this.setState({
-      openEditComment: true,
+      openEditComment: !this.state.openEditComment,
       commentId: event.currentTarget.getAttribute('data-key'),
     });
   }
 
   handleRequestCloseEditComment = () => {
     this.setState({
-      openEditComment: false,
+      openEditComment: !this.state.openEditComment,
     });
   }
 
@@ -84,7 +84,7 @@ class Post extends Component {
 
   render() {
     const post = this.props.post
-    
+
     if (Object.keys(post).length === 0) {
       return (
         <div><NoMatch /></div>
