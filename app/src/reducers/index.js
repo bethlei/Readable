@@ -198,6 +198,7 @@ function postsByCategory(state = initialState.postsByCategory, action) {
 
   switch(action.type) {
     case GET_CATEGORIES:
+      // eslint-disable-next-line
       categories.map(category => {
         categoriesState[category] = {
           posts: []
@@ -213,6 +214,7 @@ function postsByCategory(state = initialState.postsByCategory, action) {
       for (const category in state) {
         categoriesArr.push(category)
       }
+      // eslint-disable-next-line
       categoriesArr.map(category => {
         categoriesState[category] = {
           posts: postsIds.filter(postId => posts[postId].category === category)
