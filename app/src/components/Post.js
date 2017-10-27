@@ -141,7 +141,9 @@ class Post extends Component {
         </Card>
       </div>
 
-      <div className={classes.commentHeader}>Join the discussion<CommentIcon className={classes.commentIcon} /><span className={classes.commentIconText}>{ post.comments.length } { post.comments.length > 1 ? `comments` : `comment` }</span></div>
+      <div className={classes.commentsWrapper}>
+        <div className={classes.commentHeader}>Join the discussion<CommentIcon className={classes.commentIcon} /><span className={classes.commentIconText}>{ post.comments.length } { post.comments.length > 1 ? `comments` : `comment` }</span></div>
+      </div>
 
       <div className={classes.commentsWrapper}>
         {commentIdsFromPost.map(comment => (

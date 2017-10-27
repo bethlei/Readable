@@ -31,7 +31,10 @@ export const styles = theme => ({
     lineHeight: 1,
     textDecoration: `none`,
     textAlign: `center`,
-    padding: theme.spacing.unit*2,
+    paddingTop: theme.spacing.unit*2,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: 0,
+    paddingRight: 0,
   },
   category: {
     display: `flex`,
@@ -40,9 +43,16 @@ export const styles = theme => ({
     backgroundColor: blue[500], // #2196f3
   },
   button: {
-    margin: theme.spacing.unit*1.375,
+    marginTop: theme.spacing.unit*0.25,
+    marginBottom: 0,
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
     fontSize: `1rem`,
     whiteSpace: `nowrap`,
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: theme.spacing.unit*0.25,
+      marginRight: theme.spacing.unit*0.25,
+    },
   },
   catLabel: {
     textTransform: `uppercase`,
@@ -62,11 +72,12 @@ export const styles = theme => ({
     maxWidth: `860px`,
     marginRight: `auto`,
     marginLeft: `auto`,
+    marginBottom: theme.spacing.unit*2,
   },
   sortWrapper: {
     paddingLeft: 0,
     paddingRight: 0,
-    paddingTop: theme.spacing.unit*3,
+    paddingTop: theme.spacing.unit*1.5,
     paddingBottom: theme.spacing.unit,
     textAlign: `left`,
   },
@@ -110,6 +121,9 @@ export const styles = theme => ({
     position: `fixed`,
     bottom: theme.spacing.unit*5,
     right: theme.spacing.unit*5,
+    [theme.breakpoints.down('sm')]: {
+      right: theme.spacing.unit*4,
+    },
   },
   deletePostIcon: {
     backgroundColor: primary,
@@ -144,7 +158,7 @@ export const styles = theme => ({
     maxWidth: `96vw`,
   },
   cardContent: {
-    padding: theme.spacing.unit*3,
+    padding: theme.spacing.unit*2,
     textAlign: `left`,
   },
   postTitle: {
@@ -172,8 +186,8 @@ export const styles = theme => ({
     color: `rgba(0, 0, 0, 0.87)`,
   },
   cardControls: {
-    paddingLeft: theme.spacing.unit*3,
-    paddingRight: theme.spacing.unit*3,
+    paddingLeft: theme.spacing.unit*2,
+    paddingRight: theme.spacing.unit*2,
     paddingTop: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
     textAlign: `left`,
@@ -272,7 +286,13 @@ export const styles = theme => ({
     transition: `border-color 0.1s ease-in`,
   },
   postDetailsWrapper: {
-    paddingTop: theme.spacing.unit*3,
+    display: `flex`,
+    flexFlow: `column nowrap`,
+    alignItems: `center`,
+    paddingTop: theme.spacing.unit*2,
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing.unit,
+    },
   },
   postTitleAlt: {
     fontSize: `1.5rem`,
@@ -282,27 +302,46 @@ export const styles = theme => ({
     display: `block`,
   },
   commentsWrapper: {
-    display: `block`,
+    display: `flex`,
+    flexFlow: `column nowrap`,
+    alignItems: `center`,
   },
   commentHeader: {
     fontWeight: 300,
     fontSize: `1.875rem`,
     color: `rgba(0,0,0,0.54)`,
-    alignSelf: `flex-start`,
-    paddingTop: theme.spacing.unit*4,
+    alignSelf: `center`,
+    paddingTop: theme.spacing.unit*2,
     paddingBottom: theme.spacing.unit*0.5,
     width: `100%`,
     display: `flex`,
     borderBottom: `1px solid #e6e6e6`,
+    maxWidth: `96vw`,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: `1.5rem`,
+    },
   },
   commentIcon: {
     paddingTop: theme.spacing.unit,
     paddingLeft: theme.spacing.unit*2,
     paddingRight: theme.spacing.unit*0.625,
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing.unit*0.5,
+    },
+    [theme.breakpoints.down('xs')]: {
+      display: `none`,
+    },
   },
   commentIconText: {
     fontSize: `1.1rem`,
-    paddingTop: theme.spacing.unit*1.125,
+    paddingTop: theme.spacing.unit*1.125,[
+    theme.breakpoints.down('sm')]: {
+      fontSize: `0.875rem`,
+      paddingTop: theme.spacing.unit*0.875,
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing.unit,
+    },
   },
   voteScoreComment: {
     color: secondary,
@@ -326,8 +365,8 @@ export const styles = theme => ({
     marginLeft: theme.spacing.unit*2,
   },
   cardCommentControls: {
-    paddingLeft: theme.spacing.unit*2.5,
-    paddingRight: theme.spacing.unit*3,
+    paddingLeft: theme.spacing.unit*1.5,
+    paddingRight: theme.spacing.unit*2,
     paddingTop: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
     textAlign: `left`,
@@ -345,5 +384,8 @@ export const styles = theme => ({
     position: `fixed`,
     bottom: theme.spacing.unit*5,
     right: theme.spacing.unit*5,
+    [theme.breakpoints.down('sm')]: {
+      right: theme.spacing.unit*4,
+    },
   },
 })
