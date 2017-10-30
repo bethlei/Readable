@@ -130,7 +130,7 @@ class Post extends Component {
               <DeleteIcon />
             </Button>
             </Tooltip>
-            <Link to ={ '/post/edit/' + post.id }>
+            <Link to ={`/post/edit/${post.id}`}>
               <Tooltip id="edit-post" title="Edit Post" placement="top">
               <Button fab color="primary" aria-label="Edit Post" className={classes.editPostIcon}>
                 <ModeEditIcon />

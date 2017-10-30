@@ -49,7 +49,7 @@ class AllPosts extends Component {
         {sortedPostIds.map(postId => (
         <Card className={classes.cardPost} key={ posts[postId].id }>
           <CardContent className={classes.cardContent}>
-            <Link to ={ '/post/' + posts[postId].id } className={classes.postTitle}>{ posts[postId].title }</Link>
+            <Link to ={`/post/${posts[postId].id}`} className={classes.postTitle}>{ posts[postId].title }</Link>
             <div className={classes.postInfo}><PersonIcon /><span className={classes.postInfoText}>{ posts[postId].author }</span></div>
             <div className={classes.postInfo}><DateRangeIcon /><span className={classes.postInfoText}>{ moment(posts[postId].timestamp).format('MMMM Do YYYY, h:mm:ss a') }</span></div>
             <div className={classes.postInfo}><CommentIcon /><span className={classes.postInfoText}>{ posts[postId].comments.length } { posts[postId].comments.length > 1 ? `comments` : `comment` }</span></div>
@@ -80,7 +80,7 @@ class AllPosts extends Component {
               <DeleteIcon />
             </Button>
             </Tooltip>
-            <Link to ={ '/post/edit/' + posts[postId].id }>
+            <Link to ={`/post/edit/${posts[postId].id}`}>
               <Tooltip id="edit-post" title="Edit Post" placement="top">
               <Button fab color="primary" aria-label="Edit Post" className={classes.editPostIcon}>
                 <ModeEditIcon />

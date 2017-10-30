@@ -18,7 +18,7 @@ const Category = (props) => {
         }}>{props.children ? props.children : `All Posts`}</Button>
       </Link>
       {categories.map(category => (
-      <Link className={classes.catLink} to={'/category/' + category} key={category}>
+      <Link className={classes.catLink} to={`/category/${category}`} key={category}>
         <Button color="contrast" dense classes={{
           root: classes.button,
           label: classes.catLabel,

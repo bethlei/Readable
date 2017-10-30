@@ -68,7 +68,7 @@ export const styles = theme => ({
     textDecoration: `none`,
   },
   mainContentWrapper: {
-    minHeight: `calc(100vh - 188px)`,
+    minHeight: `calc(100vh - 150px)`,
     maxWidth: `860px`,
     marginRight: `auto`,
     marginLeft: `auto`,
@@ -256,7 +256,7 @@ export const styles = theme => ({
   },
   errorContainer: {
     backgroundColor: primary,
-    height: `calc(100vh - 162px)`,
+    height: `calc(100vh - 134px)`,
     width: `100vw`,
     opacity: 0.9,
     textAlign: `center`,
