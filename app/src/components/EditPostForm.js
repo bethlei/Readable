@@ -17,6 +17,11 @@ import asyncValidate from './../utils/asyncValidate'
 let postId
 
 class EditPostForm extends Component {
+  constructor() {
+    super()
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
   state = {
     category: '',
   };
@@ -71,7 +76,7 @@ class EditPostForm extends Component {
         <h1 className={classes.sectionHeader}>Edit Post</h1>
       </Grid>
       <Grid item xs={12}>
-      <form className={classes.formWrapper} onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form className={classes.formWrapper} onSubmit={handleSubmit(this.onSubmit)}>
         <Field
           name='title'
           label='Title'

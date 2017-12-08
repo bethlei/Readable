@@ -10,6 +10,11 @@ import Button from 'material-ui/Button'
 import asyncValidate from './../utils/asyncValidate'
 
 class CreateCommentForm extends Component {
+  constructor() {
+    super()
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
   renderTextField({ input, label, meta: { touched, error }, ...custom }) {
     return (
       <TextField
@@ -42,7 +47,7 @@ class CreateCommentForm extends Component {
         <h1 className={classes.sectionHeader}>Add New Comment</h1>
       </Grid>
       <Grid item xs={12}>
-      <form className={classes.formWrapper} onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form className={classes.formWrapper} onSubmit={handleSubmit(this.onSubmit)}>
         <Field
           name='author'
           label='Author'

@@ -13,6 +13,11 @@ import asyncValidate from './../utils/asyncValidate'
 let commentId
 
 class EditCommentForm extends Component {
+  constructor() {
+    super()
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
   renderTextField({ input, label, meta: { touched, error }, ...custom }) {
     return (
       <TextField
@@ -42,7 +47,7 @@ class EditCommentForm extends Component {
         <h1 className={classes.sectionHeader}>Edit Comment</h1>
       </Grid>
       <Grid item xs={12}>
-      <form className={classes.formWrapper} onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form className={classes.formWrapper} onSubmit={handleSubmit(this.onSubmit)}>
         <Field
           name='author'
           label='Author'

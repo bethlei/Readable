@@ -14,6 +14,11 @@ import Button from 'material-ui/Button'
 import asyncValidate from './../utils/asyncValidate'
 
 class CreatePostForm extends Component {
+  constructor() {
+    super()
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
   state = {
     category: '',
   };
@@ -66,7 +71,7 @@ class CreatePostForm extends Component {
         <h1 className={classes.sectionHeader}>Add New Post</h1>
       </Grid>
       <Grid item xs={12}>
-      <form className={classes.formWrapper} onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form className={classes.formWrapper} onSubmit={handleSubmit(this.onSubmit)}>
         <Field
           name='title'
           label='Title'
